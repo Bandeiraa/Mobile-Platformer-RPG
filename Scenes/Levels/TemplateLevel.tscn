@@ -14,4 +14,6 @@ position = Vector2( 19.7707, 52.6352 )
 
 [node name="TileMap" parent="." instance=ExtResource( 3 )]
 tile_set = ExtResource( 4 )
+collision_layer = 2
+collision_mask = 5
 tile_data = PoolIntArray( 196619, 0, 0, 262149, 1, 0, 262151, 2, 1, 262152, 2, 1, 262153, 2, 1, 262154, 2, 1, 327680, 2, 0, 327681, 2, 1, 327682, 2, 1, 327683, 2, 1, 327684, 2, 1 )
