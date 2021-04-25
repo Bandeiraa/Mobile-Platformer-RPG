@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal animate
 signal attack 
+signal respawn
 
 onready var arrow_spawner = get_node("ArrowSpawner")
 
@@ -47,3 +48,7 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	velocity.y = move_and_slide_with_snap(velocity, snap_vector, FLOOR, true, 4, SLOPE_THRESHOLD).y
 	jump()
+
+
+func _on_screen_exited():
+	emit_signal("respawn")
