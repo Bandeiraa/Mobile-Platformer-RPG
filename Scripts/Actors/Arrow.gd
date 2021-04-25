@@ -16,10 +16,10 @@ func _physics_process(_delta):
 	translate(Vector2(3 * direction, 0))
 
 
-func _on_screen_exited():
-	queue_free()
-
-
 func _on_Arrow_body_entered(_body):
 	set_physics_process(false)
 	emit_signal("hit_animation")
+
+
+func _destroy():
+	queue_free()

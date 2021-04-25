@@ -57,6 +57,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Idle"
+frame = 2
 playing = true
 script = ExtResource( 4 )
 
@@ -72,4 +73,5 @@ scale = Vector2( 0.495462, 0.0566193 )
 [connection signal="animate" from="." to="AnimatedSprite" method="_on_Arrow_animate"]
 [connection signal="body_entered" from="." to="." method="_on_Arrow_body_entered"]
 [connection signal="hit_animation" from="." to="AnimatedSprite" method="_on_Arrow_hit_animation"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_screen_exited"]
+[connection signal="destroy" from="AnimatedSprite" to="." method="_destroy"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_destroy"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/Misc/Bridge.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Misc/Bridge-Support.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Misc/Bridge-handle-02.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 23.8903, 2.6539 )
+
+[node name="Bridge" type="StaticBody2D"]
+
+[node name="Bridge-Support" type="Sprite" parent="."]
+position = Vector2( -13.5, 12.5 )
+texture = ExtResource( 2 )
+
+[node name="Bridge-handle-04" type="Sprite" parent="."]
+position = Vector2( 21.9545, -13.6884 )
+texture = ExtResource( 3 )
+
+[node name="Bridge-handle-03" type="Sprite" parent="."]
+position = Vector2( -23.625, -13.6884 )
+texture = ExtResource( 3 )
+flip_h = true
+
+[node name="Bridge-Support2" type="Sprite" parent="."]
+position = Vector2( 16.4496, 12.5 )
+texture = ExtResource( 2 )
+flip_h = true
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 0, 8 )
+
+[node name="Bridge-handle-02" type="Sprite" parent="."]
+position = Vector2( -28.9703, -8.69822 )
+z_index = 2
+texture = ExtResource( 3 )
+flip_h = true
+
+[node name="Bridge-handle-05" type="Sprite" parent="."]
+position = Vector2( 29.0125, -9 )
+z_index = 2
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )

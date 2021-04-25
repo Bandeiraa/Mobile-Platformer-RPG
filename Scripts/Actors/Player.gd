@@ -13,7 +13,7 @@ const SLOPE_THRESHOLD = deg2rad(45)
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
 var speed = 100
-var jump_speed = -250
+var jump_speed = -200
 var velocity = Vector2.ZERO
 var direction = Vector2.ZERO
 var gravity = 500

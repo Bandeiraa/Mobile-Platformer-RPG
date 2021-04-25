@@ -1,5 +1,7 @@
 extends AnimatedSprite
 
+signal destroy
+
 func _on_Arrow_animate(direction):
 	play("Idle")
 	if direction > 0:
@@ -11,4 +13,4 @@ func _on_Arrow_animate(direction):
 func _on_Arrow_hit_animation():
 	play("Hit")
 	yield(get_tree().create_timer(0.5), "timeout")
-	queue_free()
+	emit_signal("destroy")
