@@ -3,7 +3,6 @@ extends KinematicBody2D
 signal animate
 signal attack 
 
-onready var arrow = preload("res://Scenes/Actors/Arrow.tscn")
 onready var arrow_spawner = get_node("ArrowSpawner")
 
 const FLOOR = Vector2.UP
@@ -21,7 +20,7 @@ var gravity = 500
 
 func move():
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	arrow_direction()
+	arrow_spawner.arrow_direction()
 	velocity.x = direction.x * speed
 	
 	
@@ -37,26 +36,6 @@ func attack():
 		set_physics_process(false)
 		
 		
-func _spawn_arrow():
-	var arrow_instanced = arrow.instance()
-	get_parent().add_child(arrow_instanced)
-	arrow_instanced.position = arrow_spawner.global_position
-	if sign(arrow_spawner.position.x) == 1:
-		arrow_instanced.set_arrow_direction(1)
-	else:
-		arrow_instanced.set_arrow_direction(-1)
-		
-		
-func arrow_direction():
-	if Input.is_action_pressed("ui_left"):
-		if sign(arrow_spawner.position.x) == 1:
-			arrow_spawner.position.x *= -1
-			
-	if Input.is_action_pressed("ui_right"):
-		if sign(arrow_spawner.position.x) == -1:
-			arrow_spawner.position.x *= -1
-			
-			
 func _turn_physics():
 	set_physics_process(true)
 	
