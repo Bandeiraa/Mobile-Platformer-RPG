@@ -5,6 +5,7 @@ signal attack
 signal respawn
 
 onready var arrow_spawner = get_node("ArrowSpawner")
+onready var raycast = get_node("RayCast2D")
 
 const FLOOR = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
@@ -41,7 +42,20 @@ func _turn_physics():
 	set_physics_process(true)
 	
 	
+func is_colliding():
+	if raycast.is_colliding():
+		if raycast.get_collider().is_in_group("Interactables"):
+			return true
+			
+			
+func drop_platform():
+	if is_colliding():
+		if Input.is_action_just_pressed("ui_down"):
+			get_tree().call_group("Interactables", "disable_collision")
+		
+		
 func _physics_process(delta):
+	drop_platform()
 	move()
 	attack()
 	emit_signal("animate", velocity, is_on_floor())
@@ -51,4 +65,5 @@ func _physics_process(delta):
 
 
 func _on_screen_exited():
+	get_tree().call_group("Interactables", "enable_collision")
 	emit_signal("respawn")

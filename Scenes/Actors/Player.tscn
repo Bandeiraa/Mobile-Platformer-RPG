@@ -187,6 +187,7 @@ script = ExtResource( 6 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 36 )
 animation = "Idle"
+frame = 2
 playing = true
 script = ExtResource( 7 )
 
@@ -210,6 +211,11 @@ script = ExtResource( 8 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 0.0109504, 3.95861 )
 scale = Vector2( 0.609137, 0.82105 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 4
+collide_with_areas = true
 
 [connection signal="animate" from="." to="Sprite" method="_on_Player_move"]
 [connection signal="attack" from="." to="Sprite" method="_on_Player_attack"]
