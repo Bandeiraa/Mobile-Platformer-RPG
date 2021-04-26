@@ -24,6 +24,10 @@ var velocity = Vector2.ZERO
 var direction = Vector2.ZERO
 var gravity = 500
 
+func _ready():
+	update_health(player_stats.health)
+	
+	
 func move():
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	arrow_spawner.arrow_direction()
@@ -73,8 +77,13 @@ func _on_screen_exited():
 	emit_signal("respawn")
 
 
+func update_health(value):
+	get_tree().call_group("GUI", "update_hp", value)
+	
+	
 func _on_Hurtbox_area_entered(area):
 	player_stats.health -= area.damage
+	update_health(player_stats.health)
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
 

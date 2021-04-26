@@ -57,16 +57,18 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 8 )
 animation = "Idle"
-frame = 1
+frame = 2
 playing = true
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.052556, 0.499282 )
 rotation = 1.5708
 shape = SubResource( 9 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
 position = Vector2( 0.0525558, 0.499281 )
 scale = Vector2( 0.495462, 0.0566193 )
 

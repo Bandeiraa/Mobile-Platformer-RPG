@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sprites/UI/UI-Lives.png" type="Texture" id=1]
 [ext_resource path="res://Fonts/EquipmentPro.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/GUI/LifeContainer.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/UI/LifeBar.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/UI/Empty_LifeBar.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/UI/Aux_LifeBar.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -12,7 +15,9 @@ font_data = ExtResource( 2 )
 
 [node name="HUD" type="CanvasLayer"]
 
-[node name="LifeContainer" type="Control" parent="."]
+[node name="LifeContainer" type="Control" parent="." groups=[
+"GUI",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
@@ -31,6 +36,7 @@ __meta__ = {
 }
 
 [node name="HeartLabel" type="Label" parent="LifeContainer"]
+visible = false
 margin_left = 17.875
 margin_top = 5.0
 margin_right = 52.875
@@ -41,3 +47,29 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LifeBarAux" type="TextureProgress" parent="LifeContainer"]
+margin_left = 15.5
+margin_top = 6.0
+margin_right = 56.5
+margin_bottom = 15.0
+value = 100.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LifeBar" type="TextureProgress" parent="LifeContainer"]
+margin_left = 15.5
+margin_top = 6.0
+margin_right = 56.5
+margin_bottom = 15.0
+value = 100.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="LifeContainer"]
