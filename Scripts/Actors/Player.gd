@@ -4,8 +4,12 @@ signal animate
 signal attack 
 signal respawn
 
+const DEATH_EFFECT = preload("res://Scenes/Enemies/DeathEffect.tscn")
+
+onready var player_stats = get_node("Stats")
 onready var arrow_spawner = get_node("ArrowSpawner")
 onready var raycast = get_node("RayCast2D")
+onready var hurtbox = get_node("Hurtbox")
 
 const FLOOR = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
@@ -67,3 +71,16 @@ func _physics_process(delta):
 func _on_screen_exited():
 	get_tree().call_group("Interactables", "enable_collision")
 	emit_signal("respawn")
+
+
+func _on_Hurtbox_area_entered(area):
+	player_stats.health -= area.damage
+	hurtbox.start_invincibility(0.5)
+	hurtbox.create_hit_effect()
+
+
+func _kill():
+	queue_free()
+	var enemyDeathEffect = DEATH_EFFECT.instance()
+	get_parent().add_child(enemyDeathEffect)
+	enemyDeathEffect.global_position = global_position

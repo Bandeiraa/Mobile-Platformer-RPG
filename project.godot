@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -41,6 +40,9 @@ Attack={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="World"
 2d_physics/layer_3="Interactables"
+2d_physics/layer_4="Enemies"
+2d_physics/layer_5="PlayerHurtBox"
+2d_physics/layer_6="EnemyHurtBox"
 
 [physics]
 
