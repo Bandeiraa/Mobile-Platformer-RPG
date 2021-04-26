@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/GUI/Parallax.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Enemies/Bat.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/GUI/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Resources/Tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://Scenes/Objects/Bridge.tscn" type="PackedScene" id=5]
@@ -61,6 +62,11 @@ position = Vector2( 96.7556, 112.275 )
 z_index = 2
 texture = ExtResource( 10 )
 flip_h = true
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Bat" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 257.026, 83.2445 )
 
 [node name="TileMap" parent="." instance=ExtResource( 3 )]
 tile_set = ExtResource( 4 )
