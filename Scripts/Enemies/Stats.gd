@@ -8,4 +8,5 @@ signal kill
 func set_health(value):
 	health = value
 	if health <= 0:
+		yield(get_tree().create_timer(0.2), "timeout")
 		emit_signal("kill")

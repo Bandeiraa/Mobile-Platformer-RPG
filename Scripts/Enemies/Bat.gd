@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const DEATH_EFFECT = preload("res://Scenes/Enemies/DeathEffect.tscn") 
+const DAMAGE_POPUP = preload("res://Scenes/Enviroments/DamagePopup.tscn")
 
 onready var detection_zone = get_node("DetectionZone")
 onready var stats = get_node("Stats")
@@ -55,6 +56,9 @@ func seek():
 	
 	
 func _on_Hurtbox_area_entered(area):
+	var text = DAMAGE_POPUP.instance()
+	text.amount = area.damage
+	add_child(text)
 	stats.health -= area.damage
 	knockback.x = area.direction * 80
 	hurtbox.create_hit_effect()

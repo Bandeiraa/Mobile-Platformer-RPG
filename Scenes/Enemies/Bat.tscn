@@ -36,14 +36,14 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=13]
+[sub_resource type="CapsuleShape2D" id=7]
 radius = 0.748198
 height = 3.92371
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=8]
 radius = 7.24693
 
-[sub_resource type="GDScript" id=14]
+[sub_resource type="GDScript" id=9]
 script/source = "extends Area2D
 
 var player = null
@@ -60,10 +60,10 @@ func _on_DetectionZone_body_exited(_body):
 	player = null
 "
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=10]
 radius = 135.042
 
-[sub_resource type="CircleShape2D" id=12]
+[sub_resource type="CircleShape2D" id=11]
 radius = 5.88661
 
 [node name="Bat" type="KinematicBody2D"]
@@ -73,7 +73,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "Idle"
-frame = 3
+frame = 1
 playing = true
 script = ExtResource( 3 )
 
@@ -81,7 +81,7 @@ script = ExtResource( 3 )
 visible = false
 position = Vector2( -0.720639, -2.79927 )
 rotation = 1.5708
-shape = SubResource( 13 )
+shape = SubResource( 7 )
 
 [node name="Hurtbox" parent="." groups=[
 "Hurtbox",
@@ -91,7 +91,7 @@ collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0.8805, 0 )
-shape = SubResource( 11 )
+shape = SubResource( 8 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
 max_health = 2
@@ -99,10 +99,10 @@ max_health = 2
 [node name="DetectionZone" parent="." instance=ExtResource( 6 )]
 visible = false
 collision_layer = 8
-script = SubResource( 14 )
+script = SubResource( 9 )
 
 [node name="CollisionShape2D" parent="DetectionZone" index="0"]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="HitBox" parent="." instance=ExtResource( 7 )]
 visible = false
@@ -111,7 +111,7 @@ collision_mask = 16
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2( 0.0556812, 0 )
-shape = SubResource( 12 )
+shape = SubResource( 11 )
 
 [connection signal="direction" from="." to="AnimatedSprite" method="_direction"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

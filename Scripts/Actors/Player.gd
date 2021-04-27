@@ -5,6 +5,7 @@ signal attack
 signal respawn
 
 const DEATH_EFFECT = preload("res://Scenes/Enemies/DeathEffect.tscn")
+const DAMAGE_POPUP = preload("res://Scenes/Enviroments/DamagePopup.tscn")
 
 onready var player_stats = get_node("Stats")
 onready var arrow_spawner = get_node("ArrowSpawner")
@@ -82,6 +83,9 @@ func update_health(value):
 	
 	
 func _on_Hurtbox_area_entered(area):
+	var text = DAMAGE_POPUP.instance()
+	text.amount = area.damage
+	add_child(text)
 	player_stats.health -= area.damage
 	update_health(player_stats.health)
 	hurtbox.start_invincibility(0.5)
