@@ -7,6 +7,7 @@ signal respawn
 const DEATH_EFFECT = preload("res://Scenes/Enemies/DeathEffect.tscn")
 const DAMAGE_POPUP = preload("res://Scenes/Enviroments/DamagePopup.tscn")
 
+onready var camera = get_node("Camera2D")
 onready var player_stats = get_node("Stats")
 onready var arrow_spawner = get_node("ArrowSpawner")
 onready var raycast = get_node("RayCast2D")
@@ -97,3 +98,7 @@ func _kill():
 	var enemyDeathEffect = DEATH_EFFECT.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
+
+
+func _camera_shake():
+	camera.shake(10, 0.4)

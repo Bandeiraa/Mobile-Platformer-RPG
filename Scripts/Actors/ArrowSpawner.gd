@@ -1,8 +1,11 @@
 extends Position2D
 
+signal camera_shake
+
 onready var arrow = preload("res://Scenes/Actors/Arrow.tscn")
 
 func _spawn_arrow():
+	emit_signal("camera_shake")
 	var arrow_instanced = arrow.instance()
 	get_tree().get_root().add_child(arrow_instanced)
 	arrow_instanced.position = self.global_position
