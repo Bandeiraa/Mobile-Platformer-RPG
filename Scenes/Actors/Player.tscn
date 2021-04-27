@@ -359,13 +359,13 @@ radius = 5.99586
 height = 3.22791
 
 [node name="Player" type="KinematicBody2D"]
-collision_mask = 6
+collision_mask = 78
 script = ExtResource( 6 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 36 )
 animation = "Run_Skin_00"
-frame = 6
+frame = 5
 playing = true
 script = ExtResource( 7 )
 

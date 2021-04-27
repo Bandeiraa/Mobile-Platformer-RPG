@@ -2,8 +2,42 @@
 
 [ext_resource path="res://Sprites/Objects/Obj-Arrow-Idle-12x12.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Objects/Obj-Arrow-Stuck-12x12.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/Actors/Arrow.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Actors/Arrow_AnimatedSprite.gd" type="Script" id=4]
+
+[sub_resource type="GDScript" id=10]
+script/source = "extends Area2D
+
+signal animate
+signal hit_animation
+
+onready var animated_sprite = get_node(\"AnimatedSprite\")
+
+var damage = 1
+var direction = 1
+
+func set_arrow_direction(dir):
+	direction = dir
+	
+	
+func _physics_process(_delta):
+	emit_signal(\"animate\", direction)
+	translate(Vector2(3 * direction, 0))
+
+
+func _on_Arrow_area_entered(area):
+	if area.is_in_group(\"Hurtbox\"):
+		set_physics_process(false)
+		destroy()
+
+
+func _on_Arrow_body_entered(_body):
+	set_physics_process(false)
+	emit_signal(\"hit_animation\")
+	
+	
+func destroy():
+	queue_free()
+"
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -51,13 +85,14 @@ radius = 0.38778
 height = 9.23992
 
 [node name="Arrow" type="Area2D"]
+collision_layer = 0
 collision_mask = 42
-script = ExtResource( 3 )
+script = SubResource( 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 8 )
 animation = "Idle"
-frame = 1
+frame = 2
 playing = true
 script = ExtResource( 4 )
 

@@ -23,7 +23,7 @@ func loadData():
 		file.close()
 		if typeof(data) == TYPE_DICTIONARY:
 			stored_data = data
-		else:
-			printerr("Error")
-	else:
-		printerr("No saved data!")
+		#else:
+			#printerr("Error")
+	#else:
+	#	printerr("No saved data!")

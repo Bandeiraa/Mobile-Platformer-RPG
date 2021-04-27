@@ -72,14 +72,14 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	velocity.y = move_and_slide_with_snap(velocity, snap_vector, FLOOR, true, 4, SLOPE_THRESHOLD).y
 	jump()
-
-
+	
+	
 func _on_screen_exited():
 	get_tree().call_group("Interactables", "enable_collision")
 	_kill()
 	emit_signal("respawn")
 	
-
+	
 func update_health(value):
 	get_tree().call_group("Health_GUI", "update_hp", value)
 	
@@ -92,14 +92,14 @@ func _on_Hurtbox_area_entered(area):
 	update_health(player_stats.health)
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
-
-
+	
+	
 func _kill():
 	queue_free()
 	var enemyDeathEffect = DEATH_EFFECT.instance()
-	get_parent().add_child(enemyDeathEffect)
+	get_tree().get_root().call_deferred("add_child", enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
-
-
+	
+	
 func _camera_shake():
 	camera.shake(10, 0.4)
