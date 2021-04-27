@@ -76,11 +76,12 @@ func _physics_process(delta):
 
 func _on_screen_exited():
 	get_tree().call_group("Interactables", "enable_collision")
+	_kill()
 	emit_signal("respawn")
-
+	
 
 func update_health(value):
-	get_tree().call_group("GUI", "update_hp", value)
+	get_tree().call_group("Health_GUI", "update_hp", value)
 	
 	
 func _on_Hurtbox_area_entered(area):
