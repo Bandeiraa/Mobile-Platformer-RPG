@@ -2,6 +2,8 @@ extends AnimatedSprite
 
 signal destroy
 
+var destroy_flag = false
+
 func _on_Arrow_animate(direction):
 	play("Idle")
 	if direction > 0:
@@ -12,5 +14,10 @@ func _on_Arrow_animate(direction):
 
 func _on_Arrow_hit_animation():
 	play("Hit")
-	yield(get_tree().create_timer(0.5), "timeout")
-	emit_signal("destroy")
+	destroy_flag = true
+
+
+func _on_AnimatedSprite_animation_finished():
+	if destroy_flag:
+		emit_signal("destroy")
+		destroy_flag = false
