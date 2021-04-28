@@ -365,7 +365,7 @@ script = ExtResource( 6 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 71 )
 animation = "Run_Skin_01"
-frame = 3
+frame = 2
 playing = true
 script = ExtResource( 7 )
 

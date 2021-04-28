@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Mobile Platformer"
-run/main_scene="res://Scenes/Levels/TemplateLevel.tscn"
+run/main_scene="res://Scenes/GUI/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
