@@ -12,6 +12,7 @@ onready var player_stats = get_node("Stats")
 onready var arrow_spawner = get_node("ArrowSpawner")
 onready var raycast = get_node("RayCast2D")
 onready var hurtbox = get_node("Hurtbox")
+onready var timer = get_node("Timer")
 
 const FLOOR = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
@@ -80,7 +81,7 @@ func _physics_process(delta):
 	
 func _on_screen_exited():
 	get_tree().call_group("Interactables", "enable_collision")
-	_kill()
+	kill()
 	emit_signal("respawn")
 	
 	
@@ -93,12 +94,13 @@ func _on_Hurtbox_area_entered(area):
 	text.amount = area.damage
 	add_child(text)
 	player_stats.health -= area.damage
+	camera.add_trauma(0.3)
 	update_health(player_stats.health)
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
 	
 	
-func _kill():
+func kill():
 	queue_free()
 	var enemyDeathEffect = DEATH_EFFECT.instance()
 	get_tree().get_root().call_deferred("add_child", enemyDeathEffect)
@@ -106,4 +108,8 @@ func _kill():
 	
 	
 func _camera_shake():
-	camera.shake(10, 0.4)
+	camera.add_trauma(0.15)
+
+
+func start_timer():
+	timer.start()

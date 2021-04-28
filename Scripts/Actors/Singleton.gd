@@ -2,7 +2,7 @@ extends Node
 
 const FILE_NAME = "res://save_data.save"
 
-var current_selected_skin_suffix = "_00"
+var current_selected_skin_suffix = "_01"
 
 var stored_data = {
 	"skin": current_selected_skin_suffix

@@ -1,26 +1,39 @@
 extends Camera2D
 
-var magnitude = 0
-var time_left = 0
-var is_shaking = false
+export var decay = .4
+export var max_offset = Vector2(100, 75)
+export var max_roll = .1
+export(NodePath) var target
 
-func shake(new_magnitude, life_time):
-	if magnitude > new_magnitude: return
+var trauma = 0.0
+var trauma_power = 2
+
+onready var noise = OpenSimplexNoise.new()
+var noise_y = 0
+
+func _ready():
+	randomize()
+	noise.seed = randi()
+	noise.period = 4
+	noise.octaves = 2
 	
-	magnitude = new_magnitude
-	time_left = life_time
 	
-	if is_shaking: return
-	is_shaking = true
+func add_trauma(amount):
+	trauma = min(trauma + amount, 1.0)
 	
-	while time_left > 0:
-		var pos = Vector2()
-		pos.x = rand_range(-magnitude, magnitude)
-		set_position(pos)
+	
+func _process(delta):
+	if target:
+		global_position = get_node(target).global_position
 		
-		time_left -= get_process_delta_time()
-		yield(get_tree(), "idle_frame")
+	if trauma:
+		trauma = max(trauma - decay * delta, 0)
+		shake()
 		
-	magnitude = 0
-	is_shaking = false
-	set_position(Vector2(0, 0))
+		
+func shake():
+	var amount = pow(trauma, trauma_power)
+	noise_y += 1
+	rotation = max_roll * amount * noise.get_noise_2d(noise.seed, noise_y)
+	offset.x = max_offset.x * amount * noise.get_noise_2d(noise.seed * 2, noise_y)
+	offset.y = max_offset.y * amount * noise.get_noise_2d(noise.seed * 3, noise_y)
