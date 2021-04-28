@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Area2D
@@ -13,14 +13,10 @@ func _on_DetectionZone_body_exited(_body):
 	player = null
 "
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 144.767
-
 [node name="DetectionZone" type="Area2D"]
 script = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
 
 [connection signal="body_entered" from="." to="." method="_on_DetectionZone_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_DetectionZone_body_exited"]

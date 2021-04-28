@@ -62,7 +62,7 @@ func _on_DetectionZone_body_exited(_body):
 "
 
 [sub_resource type="CircleShape2D" id=10]
-radius = 135.042
+radius = 106.514
 
 [sub_resource type="CircleShape2D" id=11]
 radius = 5.88661
@@ -99,11 +99,11 @@ shape = SubResource( 8 )
 script = ExtResource( 8 )
 
 [node name="DetectionZone" parent="." instance=ExtResource( 6 )]
-visible = false
 collision_layer = 8
 script = SubResource( 9 )
 
 [node name="CollisionShape2D" parent="DetectionZone" index="0"]
+visible = false
 shape = SubResource( 10 )
 
 [node name="HitBox" parent="." instance=ExtResource( 7 )]

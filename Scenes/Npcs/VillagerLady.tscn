@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/Npcs/NpcTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/NPC/NPC-Village-Lady-02-Idle-24x24.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/UI/Quest-Mark-Idle-16x16.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Npcs/VillagerLady.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.93418, 6.32758 )
@@ -66,9 +67,12 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="CircleShape2D" id=14]
+radius = 26.7911
+
 [node name="VillagerLady" instance=ExtResource( 1 )]
 collision_layer = 64
-collision_mask = 65
+script = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 visible = false
@@ -88,5 +92,17 @@ position = Vector2( -0.198648, -16.0794 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="QuestIconSpawner" index="0"]
 frames = SubResource( 13 )
 animation = "Default"
-frame = 2
 playing = true
+
+[node name="DetectionZone" parent="." index="3"]
+collision_layer = 64
+
+[node name="CollisionShape2D" parent="DetectionZone" index="0"]
+visible = false
+position = Vector2( 0, 4.12945 )
+shape = SubResource( 14 )
+
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_DetectionZone_body_exited"]
+
+[editable path="DetectionZone"]
