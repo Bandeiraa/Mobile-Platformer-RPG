@@ -4,7 +4,7 @@
 [ext_resource path="res://Sprites/Objects/Obj-Arrow-Stuck-12x12.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Actors/Arrow_AnimatedSprite.gd" type="Script" id=4]
 
-[sub_resource type="GDScript" id=10]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Area2D
 
 signal animate
@@ -21,7 +21,7 @@ func set_arrow_direction(dir):
 	
 func _physics_process(_delta):
 	emit_signal(\"animate\", direction)
-	translate(Vector2(3 * direction, 0))
+	translate(Vector2(4 * direction, 0))
 
 
 func _on_Arrow_area_entered(area):
@@ -39,60 +39,60 @@ func destroy():
 	queue_free()
 "
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 12, 12 )
-
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 12, 0, 12, 12 )
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 12, 12 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 24, 0, 12, 12 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 24, 24, 12, 12 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 12, 12 )
-
-[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
 region = Rect2( 12, 0, 12, 12 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 12, 12, 12 )
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 12, 12 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 12, 0, 12, 12 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 0, 12, 12 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 24, 12, 12 )
+
+[sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
-"loop": false,
-"name": "Hit",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": false,
+"name": "Hit",
+"speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=9]
+[sub_resource type="CapsuleShape2D" id=10]
 radius = 0.38778
 height = 9.23992
 
 [node name="Arrow" type="Area2D"]
 collision_layer = 0
 collision_mask = 42
-script = SubResource( 10 )
+script = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 8 )
+frames = SubResource( 9 )
 animation = "Idle"
-frame = 2
+frame = 1
 playing = true
 script = ExtResource( 4 )
 
@@ -100,7 +100,7 @@ script = ExtResource( 4 )
 visible = false
 position = Vector2( 0.052556, 0.499282 )
 rotation = 1.5708
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 visible = false

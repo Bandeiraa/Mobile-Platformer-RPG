@@ -21,6 +21,7 @@ const SLOPE_THRESHOLD = deg2rad(45)
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
+var can_shoot = false
 var speed = 100
 var jump_speed = -200
 var velocity = Vector2.ZERO
@@ -38,13 +39,16 @@ func move():
 	
 	
 func jump():
-	if Input.is_action_just_pressed("ui_select") and is_on_floor():
-		snap_vector = Vector2.ZERO
-		velocity.y = jump_speed
+	if is_on_floor():
+		can_shoot = true
+		if Input.is_action_just_pressed("ui_select"):
+			snap_vector = Vector2.ZERO
+			velocity.y = jump_speed
+			can_shoot = false
 		
 		
 func attack():
-	if Input.is_action_just_pressed("Attack"):
+	if Input.is_action_just_pressed("Attack") and can_shoot:
 		emit_signal("attack")
 		turn_physics_off()
 		
