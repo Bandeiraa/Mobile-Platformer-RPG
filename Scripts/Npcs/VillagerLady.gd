@@ -8,10 +8,16 @@ onready var quest_icon = get_node("QuestIconSpawner")
 var dialog_path = "res://Resources/Quest_01.json"
 
 func _on_DetectionZone_body_entered(_body):
-	quest_icon.show()
-	emit_signal("can_interact", dialog_path)
+	if dialog_path != null:
+		quest_icon.show()
+		emit_signal("can_interact", dialog_path)
 
 
 func _on_DetectionZone_body_exited(_body):
 	quest_icon.hide()
 	emit_signal("cannot_interact")
+	
+	
+func kill_dialog_path():
+	quest_icon.hide()
+	dialog_path = null

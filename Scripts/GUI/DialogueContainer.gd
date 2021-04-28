@@ -47,6 +47,7 @@ func get_dialog():
 func next_phrase():
 	if phrase_number >= len(dialog):
 		queue_free()
+		get_tree().paused = false
 		return
 		
 	finished = false

@@ -11,6 +11,7 @@ var dialogue = ""
 func _ready():
 	spawn_player()
 	lady_villager.connect("can_interact", self, "interact")
+	lady_villager.connect("cannot_interact", self, "cannot_interact")
 	
 	
 func spawn_player():
@@ -23,8 +24,14 @@ func _process(_delta):
 	if Input.is_action_just_pressed("Interact") and dialogue_flag:
 		get_tree().call_group("HUD", "call_dialogue", dialogue)
 		dialogue_flag = false
+		lady_villager.kill_dialog_path()
+		get_tree().paused = true
 		
 		
 func interact(current_dialogue):
 	dialogue = current_dialogue
 	dialogue_flag = true
+	
+	
+func cannot_interact():
+	dialogue_flag = false

@@ -45,11 +45,15 @@ func jump():
 func attack():
 	if Input.is_action_just_pressed("Attack"):
 		emit_signal("attack")
-		set_physics_process(false)
+		turn_physics_off()
 		
 		
-func _turn_physics():
+func _turn_physics_on():
 	set_physics_process(true)
+	
+	
+func turn_physics_off():
+	set_physics_process(false)
 	
 	
 func is_colliding():
