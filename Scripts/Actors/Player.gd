@@ -2,12 +2,14 @@ extends KinematicBody2D
 
 signal animate
 signal attack 
+signal die
+signal disconnect_camera
 #signal respawn
 
 const DEATH_EFFECT = preload("res://Scenes/Enemies/DeathEffect.tscn")
 const DAMAGE_POPUP = preload("res://Scenes/Enviroments/DamagePopup.tscn")
 
-onready var camera = get_node("Camera2D")
+onready var camera = get_node("Camera")
 onready var player_stats = get_node("Stats")
 onready var arrow_spawner = get_node("ArrowSpawner")
 onready var raycast = get_node("RayCast2D")
@@ -124,4 +126,6 @@ func _camera_shake():
 
 
 func start_timer():
+	emit_signal("disconnect_camera")
+	emit_signal("die")
 	timer.start()

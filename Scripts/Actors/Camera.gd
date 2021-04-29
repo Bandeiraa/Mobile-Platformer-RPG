@@ -1,5 +1,7 @@
 extends Camera2D
 
+onready var camera = load("res://Scenes/Enviroments/Camera.tscn")
+
 export var decay = .4
 export var max_offset = Vector2(100, 75)
 export var max_roll = .1
@@ -37,3 +39,10 @@ func shake():
 	rotation = max_roll * amount * noise.get_noise_2d(noise.seed, noise_y)
 	offset.x = max_offset.x * amount * noise.get_noise_2d(noise.seed * 2, noise_y)
 	offset.y = max_offset.y * amount * noise.get_noise_2d(noise.seed * 3, noise_y)
+
+
+func _on_Player_disconnect_camera():
+	var instanced_camera = camera.instance()
+	get_tree().get_root().add_child(instanced_camera)
+	instanced_camera.position = global_position
+	instanced_camera.current = true
