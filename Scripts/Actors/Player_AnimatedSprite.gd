@@ -2,6 +2,7 @@ extends AnimatedSprite
 
 signal turn_physics
 signal spawn_arrow
+signal flip_direction
 
 var attack_flag = false
 var current_skin
@@ -9,6 +10,10 @@ var current_skin
 func _ready():
 	Singleton.loadData()
 	current_skin = Singleton.stored_data.skin
+	
+	
+func _process(_delta):
+	emit_signal("flip_direction", self.is_flipped_h())
 	
 	
 func _on_Player_move(input_vector, on_floor):

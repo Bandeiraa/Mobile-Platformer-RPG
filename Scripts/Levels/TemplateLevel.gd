@@ -3,15 +3,28 @@ extends Node
 onready var player = load("res://Scenes/Actors/Player.tscn")
 onready var player_spawn_position = get_node("PlayerSpawnPosition")
 onready var lady_villager = get_node("Npcs/VillagerLady")
- 
+onready var animation = get_node("Animation")
+
+onready var enemies = get_node("Enemies")
+onready var npcs = get_node("Npcs")
+
 var instanced_player
 var dialogue_flag = false
 var dialogue = ""
 
 func _ready():
+	get_tree().call_group("HUD", "hide")
+	animation.play("FadeScreen")
 	spawn_player()
 	lady_villager.connect("can_interact", self, "interact")
 	lady_villager.connect("cannot_interact", self, "cannot_interact")
+	
+	
+func show_hud():
+	get_tree().call_group("HUD", "show")
+	instanced_player.show()
+	npcs.show()
+	enemies.show()
 	
 	
 func spawn_player():

@@ -21,6 +21,7 @@ const SLOPE_THRESHOLD = deg2rad(45)
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
+var can_receive_input = true
 var can_shoot = false
 var speed = 100
 var jump_speed = -200
@@ -33,7 +34,12 @@ func _ready():
 	
 	
 func move():
-	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	direction.x = 0
+	if Input.is_action_pressed("ui_right") and can_receive_input and not Input.is_action_pressed("ui_left"):
+		direction.x = 1
+	elif not Input.is_action_pressed("ui_right") and can_receive_input and Input.is_action_pressed("ui_left"):
+		direction.x = -1 
+		
 	arrow_spawner.arrow_direction()
 	velocity.x = direction.x * speed
 	
@@ -44,17 +50,19 @@ func jump():
 		if Input.is_action_just_pressed("ui_select"):
 			snap_vector = Vector2.ZERO
 			velocity.y = jump_speed
-			can_shoot = false
+			#can_shoot = false
 		
 		
 func attack():
 	if Input.is_action_just_pressed("Attack") and can_shoot:
 		emit_signal("attack")
-		turn_physics_off()
+		velocity.x = 0
+		can_receive_input = false
 		
 		
 func _turn_physics_on():
 	set_physics_process(true)
+	can_receive_input = true
 	
 	
 func turn_physics_off():
@@ -86,7 +94,7 @@ func _physics_process(delta):
 func _on_screen_exited():
 	get_tree().call_group("Interactables", "enable_collision")
 	kill()
-	emit_signal("respawn")
+	#emit_signal("respawn")
 	
 	
 func update_health(value):
