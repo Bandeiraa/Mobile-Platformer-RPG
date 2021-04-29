@@ -93,9 +93,12 @@ func _physics_process(delta):
 	jump()
 	
 	
-func _on_screen_exited():
+func kill():
 	get_tree().call_group("Interactables", "enable_collision")
-	kill()
+	queue_free()
+	var enemyDeathEffect = DEATH_EFFECT.instance()
+	get_tree().get_root().call_deferred("add_child", enemyDeathEffect)
+	enemyDeathEffect.global_position = global_position
 	#emit_signal("respawn")
 	
 	
@@ -112,13 +115,6 @@ func _on_Hurtbox_area_entered(area):
 	update_health(player_stats.health)
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
-	
-	
-func kill():
-	queue_free()
-	var enemyDeathEffect = DEATH_EFFECT.instance()
-	get_tree().get_root().call_deferred("add_child", enemyDeathEffect)
-	enemyDeathEffect.global_position = global_position
 	
 	
 func _camera_shake():
