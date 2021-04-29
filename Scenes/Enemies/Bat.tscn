@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Sprites/Enemies/Enemy-Bat-Fly-32x32.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Enemies/Bat.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Enemies/DetectionZone.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Enemies/HitBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/Enemies/BatStats.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Enemies/WanderController.tscn" type="PackedScene" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -117,6 +118,8 @@ shape = SubResource( 11 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="WanderController" parent="." instance=ExtResource( 9 )]
 
 [connection signal="direction" from="." to="AnimatedSprite" method="_direction"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

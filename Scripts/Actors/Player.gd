@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 signal animate
 signal attack 
-signal respawn
+#signal respawn
 
 const DEATH_EFFECT = preload("res://Scenes/Enemies/DeathEffect.tscn")
 const DAMAGE_POPUP = preload("res://Scenes/Enviroments/DamagePopup.tscn")

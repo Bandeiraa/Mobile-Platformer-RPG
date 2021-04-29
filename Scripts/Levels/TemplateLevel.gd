@@ -15,14 +15,13 @@ var dialogue = ""
 func _ready():
 	get_tree().call_group("HUD", "hide")
 	animation.play("FadeScreen")
-	spawn_player()
 	lady_villager.connect("can_interact", self, "interact")
 	lady_villager.connect("cannot_interact", self, "cannot_interact")
 	
 	
 func show_hud():
 	get_tree().call_group("HUD", "show")
-	instanced_player.show()
+	spawn_player()
 	npcs.show()
 	enemies.show()
 	

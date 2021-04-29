@@ -7,10 +7,12 @@ onready var detection_zone = get_node("DetectionZone")
 onready var stats = get_node("Stats")
 onready var hurtbox = get_node("Hurtbox")
 onready var timer = get_node("Timer")
+onready var wander_controller = get_node("WanderController")
 
 export var ACCELERATION = 300
 export var MAX_SPEED = 50
 export var FRICTION = 200
+export var WANDER_TARGET_RANGE = 4
 
 signal direction
 
@@ -26,9 +28,13 @@ var gravity = 500
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 	
+func _ready():
+	randomize()
+	state = new_state([IDLE, WANDER])
+	
+	
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
-	#knockback.y += gravity * delta #If I want the bat to have gravity
 	knockback = move_and_slide(knockback)
 	
 	match state:
@@ -36,14 +42,24 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			seek()
 			
-		WANDER:
-			pass
+			if wander_controller.get_time_left() == 0:
+				update_wander()
 			
+		WANDER:
+			seek()
+			if wander_controller.get_time_left() == 0:
+				update_wander()
+				
+			accelerate_towards(wander_controller.target_position, delta)
+
+			if global_position.distance_to(wander_controller.target_position) <= WANDER_TARGET_RANGE:
+				update_wander()
+				
 		CHASE:
 			var player = detection_zone.player
 			if player != null:
-				var direction = (player.global_position - global_position).normalized()
-				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+				accelerate_towards(player.global_position, delta)
+				
 			else:
 				state = IDLE
 				
@@ -51,9 +67,24 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 	
 	
+func update_wander():
+	state = new_state([IDLE, WANDER])
+	wander_controller.start_wander_timer(rand_range(1, 3))
+	
+	
+func accelerate_towards(point, delta):
+	var direction = global_position.direction_to(point)
+	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+	
+	
 func seek():
 	if detection_zone.can_track_player():
 		state = CHASE
+	
+	
+func new_state(state_list):
+	state_list.shuffle()
+	return state_list.pop_front()
 	
 	
 func _on_Hurtbox_area_entered(area):
