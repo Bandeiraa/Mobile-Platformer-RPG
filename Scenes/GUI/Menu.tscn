@@ -17,15 +17,14 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=3]
 size = 8
 font_data = ExtResource( 4 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "Sky_Movement"
+[sub_resource type="Animation" id=4]
 length = 10.0
 loop = true
 tracks/0/type = "value"
@@ -41,8 +40,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -320, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Mountains_Movement"
+[sub_resource type="Animation" id=5]
 length = 8.0
 loop = true
 tracks/0/type = "value"
@@ -58,8 +56,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -320, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "Trees01_Movement"
+[sub_resource type="Animation" id=6]
 length = 4.0
 loop = true
 tracks/0/type = "value"
@@ -75,8 +72,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 29 ), Vector2( -320, 29 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Trees02_Movement"
+[sub_resource type="Animation" id=7]
 length = 6.0
 loop = true
 tracks/0/type = "value"
@@ -92,8 +88,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 26 ), Vector2( -320, 26 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "FadeScreen"
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("FadeRect:color")
 tracks/0/interp = 1
@@ -220,7 +215,7 @@ margin_left = -69.5
 margin_top = 20.0
 margin_right = 69.5
 margin_bottom = 23.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 2 )
 text = "Selecione uma skin"
 align = 1
 valign = 1
@@ -248,7 +243,7 @@ margin_left = -12.0
 margin_top = 11.0
 margin_right = 12.0
 margin_bottom = 25.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 3 )
 text = "Padrão"
 align = 1
 valign = 1
@@ -276,7 +271,7 @@ margin_left = -13.0
 margin_top = 11.0
 margin_right = 13.0
 margin_bottom = 25.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 3 )
 text = "Skin 01"
 align = 1
 valign = 1
@@ -297,22 +292,22 @@ __meta__ = {
 
 [node name="AnimationSky" type="AnimationPlayer" parent="."]
 autoplay = "Sky_Movement"
-anims/Sky_Movement = SubResource( 2 )
+anims/Sky_Movement = SubResource( 4 )
 
 [node name="AnimationMountains" type="AnimationPlayer" parent="."]
 autoplay = "Mountains_Movement"
-anims/Mountains_Movement = SubResource( 3 )
+anims/Mountains_Movement = SubResource( 5 )
 
 [node name="AnimationTrees01" type="AnimationPlayer" parent="."]
 autoplay = "Trees01_Movement"
-anims/Trees01_Movement = SubResource( 4 )
+anims/Trees01_Movement = SubResource( 6 )
 
 [node name="AnimationTrees02" type="AnimationPlayer" parent="."]
 autoplay = "Trees02_Movement"
-anims/Trees02_Movement = SubResource( 5 )
+anims/Trees02_Movement = SubResource( 7 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
-anims/FadeScreen = SubResource( 6 )
+anims/FadeScreen = SubResource( 8 )
 
 [connection signal="pressed" from="CentralIcon/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="CentralIcon/ExitGameButton" to="." method="_on_ExitGameButton_pressed"]

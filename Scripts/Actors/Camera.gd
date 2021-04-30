@@ -45,4 +45,5 @@ func _on_Player_disconnect_camera():
 	var instanced_camera = camera.instance()
 	get_tree().get_root().add_child(instanced_camera)
 	instanced_camera.position = global_position
+	instanced_camera.limit_left = -1500
 	instanced_camera.current = true
