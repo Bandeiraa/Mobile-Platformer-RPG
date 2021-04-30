@@ -5,6 +5,8 @@ onready var player_spawn_position = get_node("PlayerSpawnPosition")
 onready var lady_villager = get_node("Npcs/VillagerLady")
 onready var HUD = get_node("HUD")
 
+onready var player_camera = get_node("PlayerSpawnPosition/Camera")
+
 onready var enemies = get_node("Enemies")
 onready var npcs = get_node("Npcs")
 
@@ -29,6 +31,7 @@ func spawn_player():
 	player_spawn_position.call_deferred("add_child", instanced_player)
 	#instanced_player.connect("respawn", self, "spawn_player")
 	instanced_player.connect("die", HUD, "died_screen_animation")
+	instanced_player.connect("disconnect_camera", self, "change_camera")
 	
 	
 func _process(_delta):
@@ -46,3 +49,9 @@ func interact(current_dialogue):
 	
 func cannot_interact():
 	dialogue_flag = false
+	
+	
+func change_camera():
+	player_camera.position = instanced_player.position
+	player_camera.limit_left = -550
+	player_camera.current = true

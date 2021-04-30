@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -54,6 +53,7 @@ Interact={
 2d_physics/layer_5="PlayerHurtBox"
 2d_physics/layer_6="EnemyHurtBox"
 2d_physics/layer_7="Npcs"
+2d_physics/layer_8="Portals"
 
 [physics]
 

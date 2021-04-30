@@ -14,7 +14,6 @@ onready var player_stats = get_node("Stats")
 onready var arrow_spawner = get_node("ArrowSpawner")
 onready var raycast = get_node("RayCast2D")
 onready var hurtbox = get_node("Hurtbox")
-onready var timer = get_node("Timer")
 
 const FLOOR = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
@@ -93,15 +92,6 @@ func _physics_process(delta):
 	jump()
 	
 	
-func kill():
-	get_tree().call_group("Interactables", "enable_collision")
-	queue_free()
-	var enemyDeathEffect = DEATH_EFFECT.instance()
-	get_tree().get_root().call_deferred("add_child", enemyDeathEffect)
-	enemyDeathEffect.global_position = global_position
-	#emit_signal("respawn")
-	
-	
 func update_health(value):
 	get_tree().call_group("Health_GUI", "update_hp", value)
 	
@@ -121,7 +111,12 @@ func _camera_shake():
 	camera.add_trauma(0.15)
 
 
-func start_timer():
+func kill():
 	emit_signal("disconnect_camera")
 	emit_signal("die")
-	timer.start()
+	get_tree().call_group("Interactables", "enable_collision")
+	queue_free()
+	var enemyDeathEffect = DEATH_EFFECT.instance()
+	get_tree().get_root().call_deferred("add_child", enemyDeathEffect)
+	enemyDeathEffect.global_position = global_position
+	#emit_signal("respawn")
