@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Sprites/UI/UI-Lives.png" type="Texture" id=1]
 [ext_resource path="res://Fonts/EquipmentPro.ttf" type="DynamicFontData" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Sprites/UI/ManaBar.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/GUI/HUD.gd" type="Script" id=9]
 [ext_resource path="res://Fonts/Exo-Black.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://Scenes/GUI/QuestsContainer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Resources/FontTheme.tres" type="Theme" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -17,7 +19,7 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 10 )
@@ -50,8 +52,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Hide"
+[sub_resource type="Animation" id=4]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("HideHud:color")
@@ -111,6 +112,7 @@ margin_left = 17.875
 margin_top = 5.0
 margin_right = 52.875
 margin_bottom = 17.0
+theme = ExtResource( 12 )
 custom_fonts/font = SubResource( 1 )
 text = "3"
 valign = 1
@@ -189,6 +191,9 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="ManaContainer"]
 
+[node name="QuestsContainer" parent="." instance=ExtResource( 11 )]
+visible = false
+
 [node name="HideHud" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -208,7 +213,7 @@ margin_left = -107.5
 margin_top = -32.5
 margin_right = 107.5
 margin_bottom = 32.5
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "Você Morreu"
 align = 1
@@ -221,4 +226,4 @@ __meta__ = {
 [node name="Animation" type="AnimationPlayer" parent="."]
 autoplay = "Hide"
 anims/DiedScreen = SubResource( 3 )
-anims/Hide = SubResource( 2 )
+anims/Hide = SubResource( 4 )

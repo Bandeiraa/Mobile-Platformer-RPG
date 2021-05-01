@@ -4,5 +4,6 @@
     {"Name": "Aldeã Mirtha", "Text": "Recentemente monstros começaram a atacar a nossa vila, comendo a nossa plantação e fazendo barulhos assustadores à noite"},
     {"Name": "Aldeã Mirtha", "Text": "Estamos suspeitando de que eles estejam criando um ninho mais para o Leste da vila"},
     {"Name": "Aldeã Mirtha", "Text": "Você poderia derrotar 3 morcegos, para tentar inibir os monstros da nossa vila?"},
-    {"Name": "Aventureiro", "Text": "É pra já!"}
+    {"Name": "Aventureiro", "Text": "É pra já!"},
+    {"Quest_Description": "Eliminar 3 morcegos, progresso atual: "}
 ]

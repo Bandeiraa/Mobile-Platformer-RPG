@@ -1,5 +1,7 @@
 extends Control
 
+signal show_quest
+
 onready var person_name = get_node("DialogueBox/Name")
 onready var person_image = get_node("DialogueBox/FaceBox/ImageRect")
 onready var person_phrase = get_node("DialogueBox/Text")
@@ -45,9 +47,11 @@ func get_dialog():
 		
 		
 func next_phrase():
-	if phrase_number >= len(dialog):
+	if phrase_number >= len(dialog) - 1:
 		queue_free()
 		get_tree().paused = false
+		var argument = dialog[len(dialog) - 1]["Quest_Description"]
+		emit_signal("show_quest", argument)
 		return
 		
 	finished = false
