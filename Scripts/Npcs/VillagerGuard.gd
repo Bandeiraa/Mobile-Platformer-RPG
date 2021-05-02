@@ -6,10 +6,10 @@ signal cannot_interact
 onready var quest_icon = get_node("QuestIconSpawner")
 
 var quest_monster_type = "Morcego"
-var amount = 3
+var amount = 7
 
-var dialogue_json = "res://Resources/Quest_01_Start.json"
-var dialogue_json_endQuest = "res://Resources/Quest_01_End.json"
+var dialogue_json = "res://Resources/Quest_02_Start.json"
+var dialogue_json_endQuest = "res://Resources/Quest_02_End.json"
 
 var interact = false
 var end_quest_flag = false
@@ -31,7 +31,6 @@ func _process(_delta):
 		quest_icon.hide()
 		dialogue_json = null
 		get_tree().paused = true
-		
 		
 func _on_DetectionZone_body_entered(_body):
 	if end_quest_flag and dialogue_json_endQuest != null:

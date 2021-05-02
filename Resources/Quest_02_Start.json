@@ -1,0 +1,7 @@
+[
+    {"Name": "Guarda da Mina", "Text": "Olá aventureiro, vejo que você está interessado em ir para as minas"},
+    {"Name": "Guarda da Mina", "Text": "Lá você poderá contratar mineiros para lhe ajudarem a farmar minérios!"},
+    {"Name": "Guarda da Mina", "Text": "Porém é perigoso ir lá agora, certifique-se de ficar mais forte para que possa enfrentar os monstros da mina"},
+    {"Name": "Guarda da Mina", "Text": "Derrote 7 morcegos e volte"},
+    {"Quest_Description": "Para as minas! Morcegos Eliminados: ", "Enemies_Amount": "7", "Monster_Type": "Morcego"}
+]

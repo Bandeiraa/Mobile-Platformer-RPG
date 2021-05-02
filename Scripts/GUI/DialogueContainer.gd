@@ -66,7 +66,8 @@ func next_phrase():
 			queue_free()
 			get_tree().paused = false
 			var type = dialogue[len(dialogue) - 1]["Monster_Type"]
-			emit_signal("kill_quest", type)
+			var amount = dialogue[len(dialogue) - 1]["Amount"]
+			emit_signal("kill_quest", type, amount)
 			return
 		
 	finished = false
@@ -76,7 +77,7 @@ func next_phrase():
 	person_phrase.visible_characters = 0
 	
 	var file = File.new()
-	var base_dialogs_file_path = "res://Sprites/Faceset/"
+	var base_dialogs_file_path = "Sprites/Faceset/"
 	var image = base_dialogs_file_path + dialogue[phrase_number]["Name"] + ".png"
 	person_image.texture = load(image) if file.file_exists(image) else person_image.set_texture(null)
 	

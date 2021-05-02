@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scenes/Enviroments/QuestIconSpawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Npcs/NpcTemplate.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Npcs/VillagerGuard.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/NPC/NPC-Village-Guard-Idle-32x32.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.57186, 10 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 7.0
+} ]
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 39.4155
+
+[node name="VillagerGuard" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+visible = false
+position = Vector2( 1.79039, 6.0172 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" parent="." index="1"]
+frames = SubResource( 5 )
+animation = "Idle"
+frame = 2
+playing = true
+
+[node name="DetectionZone" parent="." index="2"]
+visible = false
+collision_layer = 64
+
+[node name="CollisionShape2D" parent="DetectionZone" index="0"]
+shape = SubResource( 6 )
+
+[node name="QuestIconSpawner" parent="." index="3" instance=ExtResource( 1 )]
+
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_DetectionZone_body_exited"]
+
+[editable path="DetectionZone"]

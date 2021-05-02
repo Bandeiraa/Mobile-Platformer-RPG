@@ -24,14 +24,15 @@ func display_quest_status(quest_description, total_amount, monster_type):
 	
 func update_quest_status(monster_type, quantity):
 	for quest in quest_container.get_children():
-		if quest.name in monster_type:
+		if monster_type in quest.name:
 			quest.text = quest.text.replace(str(quantity - 1) +  "/", str(quantity) + "/" )
 			var total_amount = quest.text.substr(quest.text.find("/") + 1)
 			if quantity == int(total_amount):
-				get_tree().call_group("Npc", "quest_finished", monster_type)
+				get_tree().call_group("Npc", "quest_finished", monster_type, total_amount)
 				
 				
-func kill_current_quest(monster_type):
+func kill_current_quest(monster_type, quantity):
 	for quest in quest_container.get_children():
-		if quest.name == monster_type:
+		var total_amount = quest.text.substr(quest.text.find("/") + 1)
+		if int(quantity) == int(total_amount) and monster_type in quest.name:
 			quest.queue_free()

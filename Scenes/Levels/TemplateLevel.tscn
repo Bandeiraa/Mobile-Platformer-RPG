@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scenes/GUI/Parallax.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/Bat.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Scenes/Enviroments/LevelLimit.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Sprites/Misc/House-02.png" type="Texture" id=16]
 [ext_resource path="res://Scripts/Npcs/NpcManager.gd" type="Script" id=17]
+[ext_resource path="res://Scenes/Npcs/VillagerGuard.tscn" type="PackedScene" id=18]
 
 [node name="Level" type="Node"]
 script = ExtResource( 11 )
@@ -42,6 +43,10 @@ script = ExtResource( 17 )
 [node name="VillagerLady" parent="Npcs" instance=ExtResource( 13 )]
 position = Vector2( 5.14188, 108.347 )
 
+[node name="VillagerGuard" parent="Npcs" instance=ExtResource( 18 )]
+position = Vector2( -176.575, 127.961 )
+collision_layer = 64
+
 [node name="Enemies" type="Node2D" parent="."]
 visible = false
 
@@ -51,12 +56,28 @@ visible = false
 position = Vector2( 214.372, 86.6119 )
 z_index = 2
 
+[node name="Bat6" parent="Enemies/Bats" instance=ExtResource( 2 )]
+position = Vector2( -508.066, 85.1119 )
+z_index = 2
+
+[node name="Bat7" parent="Enemies/Bats" instance=ExtResource( 2 )]
+position = Vector2( -366.573, 132.499 )
+z_index = 2
+
 [node name="Bat2" parent="Enemies/Bats" instance=ExtResource( 2 )]
 position = Vector2( 388.176, 39.4152 )
 z_index = 2
 
 [node name="Bat3" parent="Enemies/Bats" instance=ExtResource( 2 )]
 position = Vector2( 738.299, 88.4146 )
+z_index = 2
+
+[node name="Bat4" parent="Enemies/Bats" instance=ExtResource( 2 )]
+position = Vector2( 657.153, 64.449 )
+z_index = 2
+
+[node name="Bat5" parent="Enemies/Bats" instance=ExtResource( 2 )]
+position = Vector2( 574.653, 39.949 )
 z_index = 2
 
 [node name="Objects" type="Node2D" parent="."]

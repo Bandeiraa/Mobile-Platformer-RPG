@@ -65,7 +65,7 @@ __meta__ = {
 [node name="Name" type="RichTextLabel" parent="DialogueBox"]
 margin_left = 34.0
 margin_top = 6.0
-margin_right = 91.0
+margin_right = 130.0
 margin_bottom = 22.0
 custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
