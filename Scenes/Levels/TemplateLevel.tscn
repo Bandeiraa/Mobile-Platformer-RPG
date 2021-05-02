@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/GUI/Parallax.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/Bat.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scenes/Enviroments/MinePortal.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Enviroments/LevelLimit.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Sprites/Misc/House-02.png" type="Texture" id=16]
+[ext_resource path="res://Scripts/Npcs/NpcManager.gd" type="Script" id=17]
 
 [node name="Level" type="Node"]
 script = ExtResource( 11 )
@@ -31,9 +32,12 @@ current = true
 limit_top = 0
 limit_bottom = 0
 
-[node name="Npcs" type="Node2D" parent="."]
+[node name="Npcs" type="Node2D" parent="." groups=[
+"Npc",
+]]
 visible = false
 position = Vector2( 5.75262, 0 )
+script = ExtResource( 17 )
 
 [node name="VillagerLady" parent="Npcs" instance=ExtResource( 13 )]
 position = Vector2( 5.14188, 108.347 )

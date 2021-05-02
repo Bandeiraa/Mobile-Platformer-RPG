@@ -1,6 +1,7 @@
 extends Control
 
 signal show_quest
+signal kill_quest
 
 onready var person_name = get_node("DialogueBox/Name")
 onready var person_image = get_node("DialogueBox/FaceBox/ImageRect")
@@ -10,15 +11,17 @@ onready var button = get_node("TextureButton")
 
 export var text_speed = 0.05
 
+var status_type
 var dialogue_path = ""
 var dialogue
 var description
 var finished = false 
 var phrase_number = 0
 
-func get_dialogue(json):
+func get_dialogue(json, status):
 	dialogue_path = json
 	dialogue = get_json_as_text()
+	status_type = status
 	next_phrase()
 	
 	
@@ -48,14 +51,23 @@ func get_json_as_text():
 		
 		
 func next_phrase():
-	if phrase_number >= len(dialogue) - 1:
-		queue_free()
-		get_tree().paused = false
-		var quest_description = dialogue[len(dialogue) - 1]["Quest_Description"]
-		var amount = dialogue[len(dialogue) - 1]["Enemies_Amount"]
-		var type = dialogue[len(dialogue) - 1]["Monster_Type"]
-		emit_signal("show_quest", quest_description, amount, type)
-		return
+	if status_type == "initializing":
+		if phrase_number >= len(dialogue) - 1:
+			queue_free()
+			get_tree().paused = false
+			var quest_description = dialogue[len(dialogue) - 1]["Quest_Description"]
+			var amount = dialogue[len(dialogue) - 1]["Enemies_Amount"]
+			var type = dialogue[len(dialogue) - 1]["Monster_Type"]
+			emit_signal("show_quest", quest_description, amount, type)
+			return
+			
+	else:
+		if phrase_number >= len(dialogue):
+			queue_free()
+			get_tree().paused = false
+			var type = dialogue[len(dialogue) - 1]["Monster_Type"]
+			emit_signal("kill_quest", type)
+			return
 		
 	finished = false
 	person_name.bbcode_text = dialogue[phrase_number]["Name"]

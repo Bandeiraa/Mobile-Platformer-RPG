@@ -5,30 +5,48 @@ signal cannot_interact
 
 onready var quest_icon = get_node("QuestIconSpawner")
 
+var quest_monster_type = "Morcego"
 var dialogue_json = "res://Resources/Quest_01_Start.json"
-var dialogue_flag = false
+var dialogue_json_endQuest = "res://Resources/Quest_01_End.json"
+var interact = false
+var end_quest_flag = false
+var type
 
 func _process(_delta):
-	if Input.is_action_just_pressed("Interact") and dialogue_flag:
-		get_tree().call_group("HUD", "call_dialogue", dialogue_json)
-		dialogue_flag = false
-		kill_dialog_path()
+	if end_quest_flag and Input.is_action_just_pressed("Interact") and interact:
+		type = "ending"
+		get_tree().call_group("HUD", "call_dialogue", dialogue_json_endQuest, type)
+		interact = false
+		quest_icon.hide()
+		dialogue_json_endQuest = null
+		get_tree().paused = true
+		
+	elif Input.is_action_just_pressed("Interact") and interact:
+		type = "initializing"
+		get_tree().call_group("HUD", "call_dialogue", dialogue_json, type)
+		interact = false
+		quest_icon.hide()
+		dialogue_json = null
 		get_tree().paused = true
 		
 		
 func _on_DetectionZone_body_entered(_body):
-	if dialogue_json != null:
-		dialogue_flag = true
+	if end_quest_flag and dialogue_json_endQuest != null:
+		interact = true
+		quest_icon.show()
+		
+	elif dialogue_json != null:
+		interact = true
 		quest_icon.show()
 		emit_signal("can_interact", dialogue_json)
 
 
 func _on_DetectionZone_body_exited(_body):
-	dialogue_flag = false
+	interact = false
 	quest_icon.hide()
 	emit_signal("cannot_interact")
 	
 	
-func kill_dialog_path():
-	quest_icon.hide()
-	dialogue_json = null
+func can_finish_quest():
+	end_quest_flag = true
+	quest_icon.show()

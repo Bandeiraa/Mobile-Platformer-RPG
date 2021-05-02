@@ -192,7 +192,6 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="ManaContainer"]
 
 [node name="QuestsContainer" parent="." instance=ExtResource( 11 )]
-visible = false
 
 [node name="HideHud" type="ColorRect" parent="."]
 anchor_right = 1.0
