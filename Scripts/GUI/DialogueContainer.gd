@@ -10,14 +10,15 @@ onready var button = get_node("TextureButton")
 
 export var text_speed = 0.05
 
-var dialog_path = ""
-var dialog
+var dialogue_path = ""
+var dialogue
+var description
 var finished = false 
 var phrase_number = 0
 
-func get_dialogue(dialogue):
-	dialog_path = dialogue
-	dialog = get_dialog()
+func get_dialogue(json):
+	dialogue_path = json
+	dialogue = get_json_as_text()
 	next_phrase()
 	
 	
@@ -31,11 +32,11 @@ func _process(_delta):
 			person_phrase.visible_characters = len(person_phrase.text)
 			
 			
-func get_dialog():
+func get_json_as_text():
 	var file = File.new()
-	assert(file.file_exists(dialog_path), "File path does not exist")
+	assert(file.file_exists(dialogue_path), "File path does not exist")
 	
-	file.open(dialog_path, File.READ)
+	file.open(dialogue_path, File.READ)
 	var json = file.get_as_text()
 	
 	var output = parse_json(json)
@@ -47,22 +48,24 @@ func get_dialog():
 		
 		
 func next_phrase():
-	if phrase_number >= len(dialog) - 1:
+	if phrase_number >= len(dialogue) - 1:
 		queue_free()
 		get_tree().paused = false
-		var argument = dialog[len(dialog) - 1]["Quest_Description"]
-		emit_signal("show_quest", argument)
+		var quest_description = dialogue[len(dialogue) - 1]["Quest_Description"]
+		var amount = dialogue[len(dialogue) - 1]["Enemies_Amount"]
+		var type = dialogue[len(dialogue) - 1]["Monster_Type"]
+		emit_signal("show_quest", quest_description, amount, type)
 		return
 		
 	finished = false
-	person_name.bbcode_text = dialog[phrase_number]["Name"]
-	person_phrase.bbcode_text = dialog[phrase_number]["Text"]
+	person_name.bbcode_text = dialogue[phrase_number]["Name"]
+	person_phrase.bbcode_text = dialogue[phrase_number]["Text"]
 		
 	person_phrase.visible_characters = 0
 	
 	var file = File.new()
 	var base_dialogs_file_path = "res://Sprites/Faceset/"
-	var image = base_dialogs_file_path + dialog[phrase_number]["Name"] + ".png"
+	var image = base_dialogs_file_path + dialogue[phrase_number]["Name"] + ".png"
 	person_image.texture = load(image) if file.file_exists(image) else person_image.set_texture(null)
 	
 	while person_phrase.visible_characters < len(person_phrase.text):

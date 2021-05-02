@@ -3,9 +3,11 @@ extends Node
 const FILE_NAME = "res://save_data.save"
 
 var current_selected_skin_suffix = "_00"
+var bat = 0
 
 var stored_data = {
-	"skin": current_selected_skin_suffix
+	"skin": current_selected_skin_suffix,
+	"bat_amount": bat
 }
 
 func save():
@@ -23,7 +25,3 @@ func loadData():
 		file.close()
 		if typeof(data) == TYPE_DICTIONARY:
 			stored_data = data
-		#else:
-			#printerr("Error")
-	#else:
-	#	printerr("No saved data!")

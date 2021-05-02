@@ -15,6 +15,7 @@ export var FRICTION = 200
 export var WANDER_TARGET_RANGE = 4
 
 signal direction
+signal bat_count
 
 enum {
 	IDLE,
@@ -22,7 +23,9 @@ enum {
 	CHASE
 }
 
+var amount = 0
 var state = IDLE
+var monster_type = "Morcego"
 
 var gravity = 500
 var velocity = Vector2.ZERO
@@ -100,7 +103,16 @@ func _kill():
 	timer.start()
 	
 	
+func verify_amount():
+	Singleton.stored_data.bat_amount += 1
+	Singleton.save()
+	Singleton.loadData()
+	amount = Singleton.stored_data.bat_amount
+	return amount
+	
+	
 func _on_Timer_timeout():
+	emit_signal("bat_count", monster_type, verify_amount())
 	queue_free()
 	var enemyDeathEffect = DEATH_EFFECT.instance()
 	get_parent().add_child(enemyDeathEffect)

@@ -41,15 +41,17 @@ position = Vector2( 5.14188, 108.347 )
 [node name="Enemies" type="Node2D" parent="."]
 visible = false
 
-[node name="Bat" parent="Enemies" instance=ExtResource( 2 )]
+[node name="Bats" type="Node2D" parent="Enemies"]
+
+[node name="Bat" parent="Enemies/Bats" instance=ExtResource( 2 )]
 position = Vector2( 214.372, 86.6119 )
 z_index = 2
 
-[node name="Bat2" parent="Enemies" instance=ExtResource( 2 )]
+[node name="Bat2" parent="Enemies/Bats" instance=ExtResource( 2 )]
 position = Vector2( 388.176, 39.4152 )
 z_index = 2
 
-[node name="Bat3" parent="Enemies" instance=ExtResource( 2 )]
+[node name="Bat3" parent="Enemies/Bats" instance=ExtResource( 2 )]
 position = Vector2( 738.299, 88.4146 )
 z_index = 2
 
