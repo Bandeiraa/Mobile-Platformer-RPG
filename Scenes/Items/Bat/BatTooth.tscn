@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Items/ItemTemplate.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Items/Bat/Bat_Tooth.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Items/BatTooth.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3, 1.5 )
+
+[node name="BatTooth" instance=ExtResource( 1 )]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource( 3 )
+drop_rate = 15.0
+item_name = "Presas de Morcego"
+item_type = "Recursos de Monstro"
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 3, 1.5 )
+shape = SubResource( 1 )
+
+[node name="TextureRect" parent="." index="1"]
+texture = ExtResource( 2 )

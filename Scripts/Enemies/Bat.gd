@@ -8,6 +8,7 @@ onready var stats = get_node("Stats")
 onready var hurtbox = get_node("Hurtbox")
 onready var timer = get_node("Timer")
 onready var wander_controller = get_node("WanderController")
+onready var items = get_node("Items")
 
 export var ACCELERATION = 300
 export var MAX_SPEED = 50
@@ -101,6 +102,7 @@ func _on_Hurtbox_area_entered(area):
 
 func _kill():
 	timer.start()
+	items.drop()
 	
 	
 func verify_amount():

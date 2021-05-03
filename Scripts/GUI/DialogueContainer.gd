@@ -16,6 +16,7 @@ var dialogue_path = ""
 var dialogue
 var description
 var finished = false 
+var click_flag = false
 var phrase_number = 0
 
 func get_dialogue(json, status):
@@ -27,12 +28,13 @@ func get_dialogue(json, status):
 	
 func _process(_delta):
 	button.visible = finished
-	if Input.is_action_just_pressed("ui_accept"):
+	if click_flag or Input.is_action_just_pressed("ui_accept"):
 		if finished:
 			next_phrase()
 			
 		else:
 			person_phrase.visible_characters = len(person_phrase.text)
+		click_flag = false
 			
 			
 func get_json_as_text():
@@ -91,3 +93,7 @@ func next_phrase():
 	finished = true
 	phrase_number += 1
 	return
+
+
+func _on_Button_pressed():
+	click_flag = true

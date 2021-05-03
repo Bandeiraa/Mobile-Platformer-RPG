@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Sprites/Enemies/Enemy-Bat-Fly-32x32.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Enemies/Bat.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Scenes/Enemies/HitBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/Enemies/BatStats.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Enemies/WanderController.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Items/Items.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/Items/BatItems.gd" type="Script" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -76,7 +78,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "Idle"
-frame = 1
+frame = 2
 playing = true
 script = ExtResource( 3 )
 
@@ -98,6 +100,9 @@ shape = SubResource( 8 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
 script = ExtResource( 8 )
+
+[node name="Items" parent="." instance=ExtResource( 10 )]
+script = ExtResource( 11 )
 
 [node name="DetectionZone" parent="." instance=ExtResource( 6 )]
 collision_layer = 8
