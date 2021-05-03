@@ -65,7 +65,6 @@ func next_phrase():
 				emit_signal("show_quest", quest_description, minimum_amount, total_amount, type)
 				return
 			
-			
 		"ending":
 			if phrase_number >= len(dialogue):
 				queue_free()

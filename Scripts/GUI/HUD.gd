@@ -14,6 +14,7 @@ func call_dialogue(dialogue, type):
 	dialogue_container.connect("show_quest", quest_container, "display_quest_status")
 	dialogue_container.connect("kill_quest", quest_container, "kill_current_quest")
 	
+	
 func play_animation():
 	animation.play("Hide")
 	

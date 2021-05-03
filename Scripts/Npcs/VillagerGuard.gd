@@ -32,6 +32,7 @@ func _process(_delta):
 		dialogue_json = null
 		get_tree().paused = true
 		
+		
 func _on_DetectionZone_body_entered(_body):
 	if end_quest_flag and dialogue_json_endQuest != null:
 		interact = true

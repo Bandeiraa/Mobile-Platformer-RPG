@@ -58,6 +58,7 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_6="EnemyHurtBox"
 2d_physics/layer_7="Npcs"
 2d_physics/layer_8="Portals"
+2d_physics/layer_9="Items"
 
 [physics]
 
