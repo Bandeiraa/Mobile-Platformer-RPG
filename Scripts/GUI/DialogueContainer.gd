@@ -53,25 +53,28 @@ func get_json_as_text():
 		
 		
 func next_phrase():
-	if status_type == "initializing":
-		if phrase_number >= len(dialogue) - 1:
-			queue_free()
-			get_tree().paused = false
-			var quest_description = dialogue[len(dialogue) - 1]["Quest_Description"]
-			var amount = dialogue[len(dialogue) - 1]["Enemies_Amount"]
-			var type = dialogue[len(dialogue) - 1]["Monster_Type"]
-			emit_signal("show_quest", quest_description, amount, type)
-			return
+	match status_type:
+		"initializing":
+			if phrase_number >= len(dialogue) - 1:
+				queue_free()
+				get_tree().paused = false
+				var quest_description = dialogue[len(dialogue) - 1]["Quest_Description"]
+				var minimum_amount = dialogue[len(dialogue) - 1]["Minimum_Amount"]
+				var total_amount = dialogue[len(dialogue) - 1]["Total_Amount"]
+				var type = dialogue[len(dialogue) - 1]["Monster_Type"]
+				emit_signal("show_quest", quest_description, minimum_amount, total_amount, type)
+				return
 			
-	else:
-		if phrase_number >= len(dialogue):
-			queue_free()
-			get_tree().paused = false
-			var type = dialogue[len(dialogue) - 1]["Monster_Type"]
-			var amount = dialogue[len(dialogue) - 1]["Amount"]
-			emit_signal("kill_quest", type, amount)
-			return
-		
+			
+		"ending":
+			if phrase_number >= len(dialogue):
+				queue_free()
+				get_tree().paused = false
+				var type = dialogue[len(dialogue) - 1]["Monster_Type"]
+				var amount = dialogue[len(dialogue) - 1]["Amount"]
+				emit_signal("kill_quest", type, amount)
+				return
+
 	finished = false
 	person_name.bbcode_text = dialogue[phrase_number]["Name"]
 	person_phrase.bbcode_text = dialogue[phrase_number]["Text"]

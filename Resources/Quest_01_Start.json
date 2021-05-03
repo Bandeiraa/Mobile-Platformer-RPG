@@ -5,5 +5,5 @@
     {"Name": "Aldea Mirtha", "Text": "Estamos suspeitando de que eles estejam criando um ninho mais para o Leste da vila"},
     {"Name": "Aldea Mirtha", "Text": "Você poderia derrotar 3 morcegos, para tentar inibir os monstros da nossa vila?"},
     {"Name": "Aventureiro", "Text": "É pra já!"},
-    {"Quest_Description": "Morcegos Eliminados: ", "Enemies_Amount": "3", "Monster_Type": "Morcego"}
+    {"Quest_Description": "Morcegos Eliminados: ", "Minimum_Amount": "0","Total_Amount": "3", "Monster_Type": "Morcego"}
 ]

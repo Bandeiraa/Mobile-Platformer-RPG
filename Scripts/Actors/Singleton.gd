@@ -6,8 +6,7 @@ var current_selected_skin_suffix = "_00"
 var bat = 0
 
 var stored_data = {
-	"skin": current_selected_skin_suffix,
-	"bat_amount": bat
+	"skin": current_selected_skin_suffix
 }
 
 func save():

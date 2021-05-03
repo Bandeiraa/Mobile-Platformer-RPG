@@ -27,6 +27,7 @@ enum {
 var amount = 0
 var state = IDLE
 var monster_type = "Morcego"
+var have_quest = false
 
 var gravity = 500
 var velocity = Vector2.ZERO
@@ -105,16 +106,8 @@ func _kill():
 	items.drop()
 	
 	
-func verify_amount():
-	Singleton.stored_data.bat_amount += 1
-	Singleton.save()
-	Singleton.loadData()
-	amount = Singleton.stored_data.bat_amount
-	return amount
-	
-	
 func _on_Timer_timeout():
-	emit_signal("bat_count", monster_type, verify_amount())
+	emit_signal("bat_count", monster_type)
 	queue_free()
 	var enemyDeathEffect = DEATH_EFFECT.instance()
 	get_parent().add_child(enemyDeathEffect)
