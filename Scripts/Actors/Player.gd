@@ -8,6 +8,7 @@ signal disconnect_camera
 
 const DEATH_EFFECT = preload("res://Scenes/Enemies/DeathEffect.tscn")
 const DAMAGE_POPUP = preload("res://Scenes/Enviroments/DamagePopup.tscn")
+const PARTICLES = preload("res://Scenes/Actors/FeetParticles.tscn")
 
 onready var camera = get_node("Camera")
 onready var player_stats = get_node("Stats")
@@ -22,6 +23,7 @@ const SLOPE_THRESHOLD = deg2rad(45)
 
 var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
+var jumping = false
 var can_receive_input = true
 var can_shoot = false
 var speed = 100
@@ -46,12 +48,20 @@ func move():
 	
 	
 func jump():
-	if is_on_floor():
+	if is_on_floor() and not jumping and Input.is_action_just_pressed("ui_select"):
+		snap_vector = Vector2.ZERO
+		velocity.y = jump_speed
+		jumping = true
 		can_shoot = true
-		if Input.is_action_just_pressed("ui_select"):
-			snap_vector = Vector2.ZERO
-			velocity.y = jump_speed
-			#can_shoot = false
+		
+	elif jumping:
+		if is_on_floor(): #Hits when reach the floor after a jump
+			camera.add_trauma(0.20)
+			var feet_particles = PARTICLES.instance()
+			get_tree().root.call_deferred("add_child", feet_particles)
+			feet_particles.emit_particles()
+			feet_particles.position = self.global_position + Vector2(0, 12)
+			jumping = false
 		
 		
 func attack():
