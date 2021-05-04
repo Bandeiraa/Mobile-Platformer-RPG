@@ -25,7 +25,6 @@ var snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 
 var jumping = false
 var can_receive_input = true
-var can_shoot = false
 var speed = 100
 var jump_speed = -200
 var velocity = Vector2.ZERO
@@ -52,7 +51,6 @@ func jump():
 		snap_vector = Vector2.ZERO
 		velocity.y = jump_speed
 		jumping = true
-		can_shoot = true
 		
 	elif jumping:
 		if is_on_floor(): #Hits when reach the floor after a jump
@@ -65,7 +63,7 @@ func jump():
 		
 		
 func attack():
-	if Input.is_action_just_pressed("Attack") and can_shoot:
+	if Input.is_action_just_pressed("Attack"):
 		emit_signal("attack")
 		velocity.x = 0
 		can_receive_input = false

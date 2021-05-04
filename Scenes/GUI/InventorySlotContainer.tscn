@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/GUI/InventorySlotContainer.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/UI/Filled_Inventory_Slot.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/GUI/Intentory/Slot1.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/GUI/Intentory/Slot2.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/GUI/Intentory/Slot3.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/GUI/Intentory/Slot4.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/GUI/Intentory/Slot5.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/GUI/Intentory/Slot6.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/GUI/Intentory/Slot7.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/GUI/Intentory/Slot8.gd" type="Script" id=9]
 
 [node name="InventorySlotContainer" type="GridContainer"]
 anchor_left = 0.5
@@ -23,31 +30,35 @@ __meta__ = {
 margin_right = 18.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
-texture = ExtResource( 2 )
+script = ExtResource( 2 )
 
 [node name="Slot2" type="TextureRect" parent="."]
 margin_left = 22.0
 margin_right = 40.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
+script = ExtResource( 3 )
 
 [node name="Slot3" type="TextureRect" parent="."]
 margin_left = 44.0
 margin_right = 62.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
+script = ExtResource( 4 )
 
 [node name="Slot4" type="TextureRect" parent="."]
 margin_left = 66.0
 margin_right = 84.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
+script = ExtResource( 5 )
 
 [node name="Slot5" type="TextureRect" parent="."]
 margin_top = 21.0
 margin_right = 18.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 18, 18 )
+script = ExtResource( 6 )
 
 [node name="Slot6" type="TextureRect" parent="."]
 margin_left = 22.0
@@ -55,6 +66,7 @@ margin_top = 21.0
 margin_right = 40.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 18, 18 )
+script = ExtResource( 7 )
 
 [node name="Slot7" type="TextureRect" parent="."]
 margin_left = 44.0
@@ -62,6 +74,7 @@ margin_top = 21.0
 margin_right = 62.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 18, 18 )
+script = ExtResource( 8 )
 
 [node name="Slot8" type="TextureRect" parent="."]
 margin_left = 66.0
@@ -69,3 +82,4 @@ margin_top = 21.0
 margin_right = 84.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 18, 18 )
+script = ExtResource( 9 )

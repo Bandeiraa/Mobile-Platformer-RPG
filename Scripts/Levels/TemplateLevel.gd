@@ -4,6 +4,7 @@ onready var player = load("res://Scenes/Actors/Player.tscn")
 onready var player_spawn_position = get_node("PlayerSpawnPosition")
 onready var lady_villager = get_node("Npcs/VillagerLady")
 onready var HUD = get_node("HUD")
+onready var inventory_ref = HUD.get_node("Inventory/InventoryContainer/InventoryTexture/InventorySlotContainer")
 onready var quest_container = HUD.get_node("QuestsContainer")
 
 onready var player_camera = get_node("PlayerSpawnPosition/Camera")
@@ -33,7 +34,7 @@ func spawn_player():
 	player_spawn_position.call_deferred("add_child", instanced_player)
 	instanced_player.connect("die", HUD, "died_screen_animation")
 	instanced_player.connect("disconnect_camera", self, "change_camera")
-	
+	instanced_player.get_node("LootRange").connect("send_dropped_item", inventory_ref, "get_item")
 	
 func change_camera():
 	player_camera.position = instanced_player.position

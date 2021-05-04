@@ -6,7 +6,13 @@ signal spawn
 
 onready var quest_container = get_node("QuestsContainer")
 onready var animation = get_node("Animation")
+onready var inventory_container = get_node("Inventory")
 
+func _process(_delta):
+	if Input.is_action_just_pressed("Inventory"):
+		inventory()
+		
+		
 func call_dialogue(dialogue, type):
 	var dialogue_container = dialogue_system.instance()
 	self.add_child(dialogue_container)
@@ -25,3 +31,7 @@ func died_screen_animation():
 	
 func spawn():
 	emit_signal("spawn")
+
+
+func inventory():
+	inventory_container.visible = !inventory_container.visible

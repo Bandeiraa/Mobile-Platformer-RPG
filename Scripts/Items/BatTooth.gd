@@ -1,5 +1,7 @@
 extends "res://Scripts/Items/ItemTemplate.gd"
 
+onready var item_texture = load("res://Sprites/Items/Bat/Bat_Tooth.png")
+
 var gravity = 250
 var velocity = Vector2()
 var travel_to_player = false
