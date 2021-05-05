@@ -83,3 +83,13 @@ margin_right = 84.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 18, 18 )
 script = ExtResource( 9 )
+
+[connection signal="items_changed" from="." to="." method="items_changed"]
+[connection signal="mouse_entered" from="Slot1" to="Slot1" method="_on_Slot1_mouse_entered"]
+[connection signal="mouse_entered" from="Slot2" to="Slot2" method="_on_Slot2_mouse_entered"]
+[connection signal="mouse_entered" from="Slot3" to="Slot3" method="_on_Slot3_mouse_entered"]
+[connection signal="mouse_entered" from="Slot4" to="Slot4" method="_on_Slot4_mouse_entered"]
+[connection signal="mouse_entered" from="Slot5" to="Slot5" method="_on_Slot5_mouse_entered"]
+[connection signal="mouse_entered" from="Slot6" to="Slot6" method="_on_Slot6_mouse_entered"]
+[connection signal="mouse_entered" from="Slot7" to="Slot7" method="_on_Slot7_mouse_entered"]
+[connection signal="mouse_entered" from="Slot8" to="Slot8" method="_on_Slot8_mouse_entered"]
