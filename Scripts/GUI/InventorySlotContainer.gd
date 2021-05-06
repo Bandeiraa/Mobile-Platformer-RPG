@@ -37,7 +37,6 @@ func get_item(item):
 		get_child(choosen_item).get_item_info(item)
 		items[choosen_item] = new_texture
 		set_texture()
-		busy_slots += 1
 		
 		
 func set_texture():
@@ -47,8 +46,18 @@ func set_texture():
 			
 		else:
 			slot.texture = in_use_texture
-
-
+			
+	var slots = 0
+	for index in items.size():
+		slots += 1
+		if items[index] == null:
+			get_children()[index].slot_occuped = false
+			slots -= 1
+			
+	busy_slots = slots
+	print(busy_slots)
+		
+		
 func get_item_index(index):
 	item_index = index
 	
@@ -65,6 +74,7 @@ func get_drag_data(_position):
 		var drag_preview = TextureRect.new()
 		drag_preview.texture = data.item
 		set_drag_preview(drag_preview)
+		set_texture()
 		return data
 	
 	
@@ -73,23 +83,31 @@ func can_drop_data(_position, data):
 	
 	
 func drop_data(_position, data):
-	var current_item = items[item_index]
-	pass
+	set_item(item_index, data.item)
 	
 	
-func set_item(item_index, item):
-	var previous_item = items[item_index]
-	items[item_index] = item
-	emit_signal("items_changed", [item_index])
-	return previous_item
+func set_item(index, item):
+	var current_slot = get_child(index)
+	var new_texture = TextureRect.new()
+	new_texture.texture = item
+	new_texture.rect_min_size = Vector2(14, 14)
+	new_texture.rect_position = Vector2(2, 2)
+	new_texture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
+	current_slot.add_child(new_texture)
+	current_slot.get_item_info(item)
+	#busy_slots += 1
+	items[index] = item
+	
+	#emit_signal("items_changed", index)
+	#set_texture()
 	
 	
-func swap_items(item_index, target_item_index):
+func swap_items(index, target_item_index):
 	var target_item = items[target_item_index]
-	var item = items[item_index]
+	var item = items[index]
 	items[target_item_index] = item
-	items[item_index] = target_item
-	emit_signal("items_changed", [item_index, target_item_index])
+	items[index] = target_item
+	#emit_signal("items_changed", [index, target_item_index])
 	
 	
 func remove_item(index):
@@ -102,11 +120,9 @@ func remove_item(index):
 		
 		
 func items_changed(index):
-	print(items)
 	get_children()[index].get_child(0).queue_free()
-	#set_texture()
-
-
+		
+		
 func _unhandled_input(event):
 	if event.is_action_released("ui_left_mouse_button"):
 		set_texture()
