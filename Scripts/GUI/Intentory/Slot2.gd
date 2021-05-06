@@ -8,6 +8,7 @@ var slot_occuped = false
 
 func get_item_info(received_item_name):
 	item_name = received_item_name
+	#print(item_name)
 	slot_occuped = true
 
 

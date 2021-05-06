@@ -6,7 +6,7 @@ onready var default_texture = load("res://Sprites/UI/Empty_Inventory_Slot.png")
 onready var in_use_texture = load("res://Sprites/UI/Filled_Inventory_Slot.png")
 
 var busy_slots = 0
-var items: Array = [null, null, null, null, null, null, null, null]
+var items: Array = [[null], [null], [null], [null], [null], [null], [null], [null]]
 var item_index
 
 func _ready():
@@ -30,12 +30,12 @@ func get_item(item):
 	else:
 		var new_texture = TextureRect.new()
 		new_texture.texture = item.item_texture
+		var item_name = item.item_name
 		new_texture.rect_min_size = Vector2(14, 14)
 		new_texture.rect_position = Vector2(2, 2)
 		new_texture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 		get_child(choosen_item).add_child(new_texture)
-		get_child(choosen_item).get_item_info(item)
-		items[choosen_item] = new_texture
+		items[choosen_item] = [new_texture, item_name]
 		set_texture()
 		
 		
@@ -50,12 +50,11 @@ func set_texture():
 	var slots = 0
 	for index in items.size():
 		slots += 1
-		if items[index] == null:
+		if items[index] == [null]:
 			get_children()[index].slot_occuped = false
 			slots -= 1
 			
 	busy_slots = slots
-	print(busy_slots)
 		
 		
 func get_item_index(index):
@@ -66,13 +65,17 @@ func get_drag_data(_position):
 	var current_slot = get_child(item_index)
 	var current_slot_children = current_slot.get_children()
 	if current_slot_children != []:
-		var item = current_slot.get_child(0).texture
+		var item_texture = current_slot.get_child(0).texture
+		var item_name = items[item_index][1]
+		#print(item_name)
 		remove_item(item_index)
 		var data = {}
-		data.item = item
+		data.item = item_texture
+		data.item_name = item_name
 		data.item_index = item_index
 		var drag_preview = TextureRect.new()
 		drag_preview.texture = data.item
+		current_slot.get_item_info(item_name)
 		set_drag_preview(drag_preview)
 		set_texture()
 		return data
@@ -83,20 +86,20 @@ func can_drop_data(_position, data):
 	
 	
 func drop_data(_position, data):
-	set_item(item_index, data.item)
+	set_item(item_index, data.item, data.item_name)
 	
 	
-func set_item(index, item):
+func set_item(index, item_texture, item_name):
 	var current_slot = get_child(index)
 	var new_texture = TextureRect.new()
-	new_texture.texture = item
+	new_texture.texture = item_texture
 	new_texture.rect_min_size = Vector2(14, 14)
 	new_texture.rect_position = Vector2(2, 2)
 	new_texture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 	current_slot.add_child(new_texture)
-	current_slot.get_item_info(item)
+	current_slot.get_item_info(item_texture)
 	#busy_slots += 1
-	items[index] = item
+	items[index] = [item_texture, item_name]
 	
 	#emit_signal("items_changed", index)
 	#set_texture()
@@ -114,7 +117,7 @@ func remove_item(index):
 	if items != []:
 		var previous_item = items[index]
 		#print(previous_item)
-		items[index] = null
+		items[index] = [null]
 		emit_signal("items_changed", index)
 		return previous_item
 		
