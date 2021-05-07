@@ -17,6 +17,7 @@ script = ExtResource( 3 )
 drop_rate = 100.0
 item_name = "Asa de Morcego"
 item_type = "Recursos de Monstro"
+item_amount = 1
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( 2.5, 4 )

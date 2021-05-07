@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/GUI/InventorySlotContainer.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/GUI/Intentory/Slot1.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/GUI/Intentory/Slot3.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/GUI/Intentory/Slot2.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/GUI/Intentory/Slot3.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/GUI/Intentory/Slot1.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/GUI/Intentory/Slot4.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/GUI/Intentory/Slot5.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/GUI/Intentory/Slot6.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/GUI/Intentory/Slot7.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/GUI/Intentory/Slot8.gd" type="Script" id=9]
+[ext_resource path="res://Resources/InventoryFontTheme.tres" type="Theme" id=10]
 
 [node name="InventorySlotContainer" type="GridContainer"]
 anchor_left = 0.5
@@ -19,6 +20,7 @@ margin_left = -42.0
 margin_top = -19.52
 margin_right = 42.0
 margin_bottom = 19.48
+theme = ExtResource( 10 )
 custom_constants/vseparation = 3
 columns = 4
 script = ExtResource( 1 )
@@ -30,7 +32,7 @@ __meta__ = {
 margin_right = 18.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
-script = ExtResource( 2 )
+script = ExtResource( 4 )
 
 [node name="Slot2" type="TextureRect" parent="."]
 margin_left = 22.0
@@ -44,7 +46,7 @@ margin_left = 44.0
 margin_right = 62.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
-script = ExtResource( 4 )
+script = ExtResource( 2 )
 
 [node name="Slot4" type="TextureRect" parent="."]
 margin_left = 66.0
@@ -85,11 +87,3 @@ rect_min_size = Vector2( 18, 18 )
 script = ExtResource( 9 )
 
 [connection signal="items_changed" from="." to="." method="items_changed"]
-[connection signal="mouse_entered" from="Slot1" to="Slot1" method="_on_Slot1_mouse_entered"]
-[connection signal="mouse_entered" from="Slot2" to="Slot2" method="_on_Slot2_mouse_entered"]
-[connection signal="mouse_entered" from="Slot3" to="Slot3" method="_on_Slot3_mouse_entered"]
-[connection signal="mouse_entered" from="Slot4" to="Slot4" method="_on_Slot4_mouse_entered"]
-[connection signal="mouse_entered" from="Slot5" to="Slot5" method="_on_Slot5_mouse_entered"]
-[connection signal="mouse_entered" from="Slot6" to="Slot6" method="_on_Slot6_mouse_entered"]
-[connection signal="mouse_entered" from="Slot7" to="Slot7" method="_on_Slot7_mouse_entered"]
-[connection signal="mouse_entered" from="Slot8" to="Slot8" method="_on_Slot8_mouse_entered"]
