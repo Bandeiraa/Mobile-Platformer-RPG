@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/GUI/InventorySlotContainer.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/GUI/Intentory/Slot3.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scripts/GUI/Intentory/Slot7.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/GUI/Intentory/Slot8.gd" type="Script" id=9]
 [ext_resource path="res://Resources/InventoryFontTheme.tres" type="Theme" id=10]
+[ext_resource path="res://Resources/ItemsFont.tres" type="DynamicFont" id=11]
 
 [node name="InventorySlotContainer" type="GridContainer"]
 anchor_left = 0.5
@@ -34,12 +35,56 @@ margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
 script = ExtResource( 4 )
 
+[node name="ItemTextureRect" type="TextureRect" parent="Slot1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemAmount" type="Label" parent="Slot1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+rect_min_size = Vector2( 6, 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Slot2" type="TextureRect" parent="."]
 margin_left = 22.0
 margin_right = 40.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
 script = ExtResource( 3 )
+
+[node name="ItemTextureRect" type="TextureRect" parent="Slot2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemAmount" type="Label" parent="Slot2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+rect_min_size = Vector2( 6, 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Slot3" type="TextureRect" parent="."]
 margin_left = 44.0
@@ -48,6 +93,28 @@ margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
 script = ExtResource( 2 )
 
+[node name="ItemTextureRect" type="TextureRect" parent="Slot3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemAmount" type="Label" parent="Slot3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+rect_min_size = Vector2( 6, 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Slot4" type="TextureRect" parent="."]
 margin_left = 66.0
 margin_right = 84.0
@@ -55,12 +122,56 @@ margin_bottom = 18.0
 rect_min_size = Vector2( 18, 18 )
 script = ExtResource( 5 )
 
+[node name="ItemTextureRect" type="TextureRect" parent="Slot4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemAmount" type="Label" parent="Slot4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+rect_min_size = Vector2( 6, 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Slot5" type="TextureRect" parent="."]
 margin_top = 21.0
 margin_right = 18.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 18, 18 )
 script = ExtResource( 6 )
+
+[node name="ItemTextureRect" type="TextureRect" parent="Slot5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemAmount" type="Label" parent="Slot5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+rect_min_size = Vector2( 6, 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Slot6" type="TextureRect" parent="."]
 margin_left = 22.0
@@ -70,6 +181,28 @@ margin_bottom = 39.0
 rect_min_size = Vector2( 18, 18 )
 script = ExtResource( 7 )
 
+[node name="ItemTextureRect" type="TextureRect" parent="Slot6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemAmount" type="Label" parent="Slot6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+rect_min_size = Vector2( 6, 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Slot7" type="TextureRect" parent="."]
 margin_left = 44.0
 margin_top = 21.0
@@ -77,6 +210,28 @@ margin_right = 62.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 18, 18 )
 script = ExtResource( 8 )
+
+[node name="ItemTextureRect" type="TextureRect" parent="Slot7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemAmount" type="Label" parent="Slot7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+rect_min_size = Vector2( 6, 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Slot8" type="TextureRect" parent="."]
 margin_left = 66.0
@@ -86,4 +241,24 @@ margin_bottom = 39.0
 rect_min_size = Vector2( 18, 18 )
 script = ExtResource( 9 )
 
-[connection signal="items_changed" from="." to="." method="items_changed"]
+[node name="ItemTextureRect" type="TextureRect" parent="Slot8"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemAmount" type="Label" parent="Slot8"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+rect_min_size = Vector2( 6, 6 )
+custom_fonts/font = ExtResource( 11 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
