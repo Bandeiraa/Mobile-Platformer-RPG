@@ -9,7 +9,7 @@ func _ready():
 	get_node("ItemAmount").text = ""
 	
 	
-func get_item_info(_received_item_name):
+func get_item_info(_received_item_name, _received_item_amount):
 	pass
 	
 	

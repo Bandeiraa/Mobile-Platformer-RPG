@@ -30,7 +30,7 @@ func get_item(item):
 		var item_amount = item.item_amount
 		chosen_child.get_node("ItemTextureRect").texture = item.item_texture
 		chosen_child.get_node("ItemAmount").text = str(item_amount)
-		chosen_child.get_item_info(item_name)
+		chosen_child.get_item_info(item_name, item_amount)
 		set_texture()
 		
 		
@@ -60,13 +60,13 @@ func get_drag_data(_position):
 	var amount = current_slot.item_amount
 	var image = current_slot.get_node("ItemTextureRect").texture
 	if image != null:
-		remove_item(item_index)
 		var dictionary = data_dictionary(image, item_name, amount, item_index)
 		drag_preview(image)
+		remove_item(item_index)
 		
 		return dictionary
 	
-#Fill data ictionary
+#Fill data dictionary
 func data_dictionary(item_image, item_name, item_amount, index):
 	var data = {}
 	data.item_image = item_image
@@ -80,9 +80,8 @@ func drag_preview(preview):
 	var drag_preview = TextureRect.new()
 	drag_preview.texture = preview
 	set_drag_preview(drag_preview)
-	set_texture()
-		
-		
+	
+	
 func can_drop_data(_position, data):
 	return data is Dictionary and data.has("item_name")
 	
@@ -102,8 +101,9 @@ func set_item(image, item_name, amount, _index):
 	else:
 		item_image.texture = image
 		item_label.text = str(amount)
-		current_slot.get_item_info(item_name)
-		set_texture()
+		current_slot.get_item_info(item_name, amount)
+		
+	set_texture()
 	
 	
 func remove_item(index):
