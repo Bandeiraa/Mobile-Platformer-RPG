@@ -90,18 +90,32 @@ func drop_data(_position, data):
 	set_item(data.item_image, data.item_name, data.item_amount, data.item_index)
 	
 	
-func set_item(image, item_name, amount, _index):
+func set_item(image, previous_item_name, amount, index):
 	#Use index wisely to do verifications
 	var current_slot = get_child(item_index)
 	var item_label = current_slot.get_node("ItemAmount")
 	var item_image = current_slot.get_node("ItemTextureRect")
-	if item_name == current_slot.item_name:
-		current_slot.increase_amount(amount) 
+	var item_amount = item_label.text
+	var item_name = current_slot.item_name
+	var current_image = item_image.texture
+
+	if current_slot.item_name != "":
+		if previous_item_name == item_name:
+			current_slot.increase_amount(amount) 
+		else:
+			var previous_slot = get_child(index)
+			previous_slot.get_node("ItemTextureRect").texture = current_image
+			previous_slot.get_node("ItemAmount").text = item_amount
+			previous_slot.get_item_info(item_name, int(item_amount))
+			
+			item_image.texture = image
+			item_label.text = str(amount)
+			current_slot.get_item_info(previous_item_name, amount)
 		
 	else:
 		item_image.texture = image
 		item_label.text = str(amount)
-		current_slot.get_item_info(item_name, amount)
+		current_slot.get_item_info(previous_item_name, amount)
 		
 	set_texture()
 	
