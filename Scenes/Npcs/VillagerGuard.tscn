@@ -32,6 +32,7 @@ animations = [ {
 radius = 39.4155
 
 [node name="VillagerGuard" instance=ExtResource( 2 )]
+collision_layer = 64
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="0"]
@@ -45,14 +46,15 @@ animation = "Idle"
 frame = 2
 playing = true
 
-[node name="DetectionZone" parent="." index="2"]
+[node name="QuestIconSpawner" parent="." index="2" instance=ExtResource( 1 )]
+visible = true
+
+[node name="DetectionZone" parent="." index="3"]
 visible = false
 collision_layer = 64
 
 [node name="CollisionShape2D" parent="DetectionZone" index="0"]
 shape = SubResource( 6 )
-
-[node name="QuestIconSpawner" parent="." index="3" instance=ExtResource( 1 )]
 
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_DetectionZone_body_exited"]

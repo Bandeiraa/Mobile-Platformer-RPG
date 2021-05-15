@@ -55,6 +55,7 @@ flip_h = true
 script = SubResource( 6 )
 
 [node name="QuestIconSpawner" parent="." index="2" instance=ExtResource( 3 )]
+visible = true
 
 [node name="DetectionZone" parent="." index="3"]
 collision_layer = 64

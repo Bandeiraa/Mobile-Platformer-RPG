@@ -36,6 +36,7 @@ func spawn_player():
 	instanced_player.connect("disconnect_camera", self, "change_camera")
 	instanced_player.get_node("LootRange").connect("send_dropped_item", inventory_ref, "get_item")
 	
+	
 func change_camera():
 	player_camera.position = instanced_player.position
 	player_camera.limit_left = -550

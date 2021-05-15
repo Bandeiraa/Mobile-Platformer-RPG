@@ -17,7 +17,7 @@ func display_quest_status(quest_description, minimum_amount, total_amount, monst
 	label.autowrap = true
 	label.align = label.ALIGN_CENTER
 	label.valign = label.VALIGN_CENTER
-	label.text = "* " + quest_description + " " + str(minimum_amount) + "/" + str(total_amount)
+	label.text = "* " + quest_description + " " + minimum_amount + "/" + str(total_amount)
 	label.name = monster_type
 	quest_container.add_child(label)
 	

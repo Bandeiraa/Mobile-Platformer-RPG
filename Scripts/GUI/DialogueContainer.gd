@@ -7,83 +7,58 @@ onready var person_name = get_node("DialogueBox/Name")
 onready var person_image = get_node("DialogueBox/FaceBox/ImageRect")
 onready var person_phrase = get_node("DialogueBox/Text")
 onready var timer = get_node("Timer")
-onready var button = get_node("TextureButton")
 
 export var text_speed = 0.05
 
+var dialogue_path
 var status_type
-var dialogue_path = ""
-var dialogue
+var monster
+var amount
+var photo
+var npc_name
 var description
 var finished = false 
-var click_flag = false
-var phrase_number = 0
+var phrase_index = 0
 
-func get_dialogue(json, status):
-	dialogue_path = json
-	dialogue = get_json_as_text()
-	status_type = status
+func get_dialogue(quest_info, dialogue, quest_status, npc_photo):
+	dialogue_path = dialogue
+	status_type = quest_status
+	photo = npc_photo
+	monster = quest_info[0]
+	amount = quest_info[1]
+	npc_name = quest_info[2]
+	description = quest_info[3]
 	next_phrase()
 	
 	
 func _process(_delta):
-	button.visible = finished
-	if click_flag or Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept"):
 		if finished:
 			next_phrase()
 			
 		else:
 			person_phrase.visible_characters = len(person_phrase.text)
-		click_flag = false
 			
 			
-func get_json_as_text():
-	var file = File.new()
-	assert(file.file_exists(dialogue_path), "File path does not exist")
-	
-	file.open(dialogue_path, File.READ)
-	var json = file.get_as_text()
-	
-	var output = parse_json(json)
-	
-	if typeof(output) == TYPE_ARRAY:
-		return output
-	else:
-		return []
-		
-		
 func next_phrase():
-	match status_type:
-		"initializing":
-			if phrase_number >= len(dialogue) - 1:
-				queue_free()
-				get_tree().paused = false
-				var quest_description = dialogue[len(dialogue) - 1]["Quest_Description"]
-				var minimum_amount = dialogue[len(dialogue) - 1]["Minimum_Amount"]
-				var total_amount = dialogue[len(dialogue) - 1]["Total_Amount"]
-				var type = dialogue[len(dialogue) - 1]["Monster_Type"]
-				emit_signal("show_quest", quest_description, minimum_amount, total_amount, type)
-				return
-			
-		"ending":
-			if phrase_number >= len(dialogue):
-				queue_free()
-				get_tree().paused = false
-				var type = dialogue[len(dialogue) - 1]["Monster_Type"]
-				var amount = dialogue[len(dialogue) - 1]["Amount"]
-				emit_signal("kill_quest", type, amount)
-				return
+	if phrase_index >= len(dialogue_path):
+		queue_free()
+		get_tree().paused = false
+		match status_type:
+			"start_quest":
+				emit_signal("show_quest", description, "0", amount, monster)
+				
+			"end_quest":
+				emit_signal("kill_quest", monster, amount)
+				
+		return
 
 	finished = false
-	person_name.bbcode_text = dialogue[phrase_number]["Name"]
-	person_phrase.bbcode_text = dialogue[phrase_number]["Text"]
-		
-	person_phrase.visible_characters = 0
 	
-	var file = File.new()
-	var base_dialogs_file_path = "Sprites/Faceset/"
-	var image = base_dialogs_file_path + dialogue[phrase_number]["Name"] + ".png"
-	person_image.texture = load(image) if file.file_exists(image) else person_image.set_texture(null)
+	person_name.bbcode_text = npc_name
+	person_phrase.bbcode_text = dialogue_path[phrase_index]
+	person_phrase.visible_characters = 0
+	person_image.texture = photo 
 	
 	while person_phrase.visible_characters < len(person_phrase.text):
 		person_phrase.visible_characters += 1
@@ -93,9 +68,4 @@ func next_phrase():
 		yield(timer, "timeout")
 		
 	finished = true
-	phrase_number += 1
-	return
-
-
-func _on_Button_pressed():
-	click_flag = true
+	phrase_index += 1

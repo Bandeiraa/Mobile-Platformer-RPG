@@ -13,10 +13,10 @@ func _process(_delta):
 		inventory()
 		
 		
-func call_dialogue(dialogue, type):
+func call_dialogue(quest_info, dialogue, status_type, npc_photo):
 	var dialogue_container = dialogue_system.instance()
 	self.add_child(dialogue_container)
-	dialogue_container.get_dialogue(dialogue, type)
+	dialogue_container.get_dialogue(quest_info, dialogue, status_type, npc_photo)
 	dialogue_container.connect("show_quest", quest_container, "display_quest_status")
 	dialogue_container.connect("kill_quest", quest_container, "kill_current_quest")
 	
