@@ -130,3 +130,10 @@ func kill():
 	get_tree().get_root().call_deferred("add_child", enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
 	#emit_signal("respawn")
+	
+	
+func update_status(health_bonus, attack_bonus):
+	player_stats.attack += attack_bonus
+	player_stats.max_health += health_bonus
+	player_stats.health += health_bonus
+	get_node("ArrowSpawner").arrow_damage = player_stats.attack

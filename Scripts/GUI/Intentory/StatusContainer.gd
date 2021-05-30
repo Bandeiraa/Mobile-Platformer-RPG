@@ -1,5 +1,7 @@
 extends Control
 
+signal send_bonus_status
+
 onready var strength_label = get_node("StrengthLabel")
 onready var health_label = get_node("HealthLabel")
 onready var strength_label_bonus = get_node("StrengthLabelAux")
@@ -31,6 +33,8 @@ func verify_attributes(health_bonus, attack_bonus):
 		
 	elif attack_bonus < 0:
 		update_text("attack_bonus", "", Color(1, 0, 0, 1), attack_bonus)
+		
+	emit_signal("send_bonus_status", health_bonus, attack_bonus)
 		 
 		
 func update_text(target, operator, color, bonus_amount):

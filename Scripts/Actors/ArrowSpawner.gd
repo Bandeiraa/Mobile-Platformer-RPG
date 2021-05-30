@@ -3,12 +3,14 @@ extends Position2D
 signal camera_shake
 
 var flipped 
+var arrow_damage = 1
 
 onready var arrow = preload("res://Scenes/Actors/Arrow.tscn")
 
 func _spawn_arrow():
 	emit_signal("camera_shake")
 	var arrow_instanced = arrow.instance()
+	arrow_instanced.damage = arrow_damage
 	get_tree().get_root().add_child(arrow_instanced)
 	arrow_instanced.position = self.global_position
 	if flipped == false:

@@ -36,6 +36,7 @@ func spawn_player():
 	instanced_player.connect("die", HUD, "died_screen_animation")
 	instanced_player.connect("disconnect_camera", self, "change_camera")
 	instanced_player.connect("send_status", equipment_inventory_ref, "set_status_text")
+	equipment_inventory_ref.connect("send_bonus_status", instanced_player, "update_status")
 	instanced_player.get_node("LootRange").connect("send_dropped_item", inventory_ref, "get_item")
 	
 	
