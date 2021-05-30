@@ -7,7 +7,7 @@ signal spawn
 onready var quest_container = get_node("QuestsContainer")
 onready var animation = get_node("Animation")
 onready var inventory_container = get_node("Inventory")
-
+	
 func _process(_delta):
 	if Input.is_action_just_pressed("Inventory"):
 		inventory()

@@ -1,6 +1,8 @@
 extends GridContainer
 
-var item_index
+var item_index = 0
+
+signal item_equipped
 
 func _ready():
 	for slot in get_children():
@@ -17,11 +19,12 @@ func can_drop_data(_position, data):
 		
 		
 func drop_data(_position, data):
-	set_item(data.item_image, data.item_name, data.item_type)
+	set_item(data.item_image, data.item_name, data.item_type, data.item_health, data.item_attack)
 	
 	
-func set_item(item_image, _item_name, _item_type):
+func set_item(item_image, _item_name, _item_type, item_health, item_attack):
 	var current_slot = get_child(item_index)
 	var equipment_image = current_slot.get_node("ItemTextureRect")
 	equipment_image.texture = item_image
 	current_slot.slot_occuped = true
+	emit_signal("item_equipped", item_health, item_attack)
