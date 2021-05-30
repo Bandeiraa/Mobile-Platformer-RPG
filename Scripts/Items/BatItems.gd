@@ -1,7 +1,7 @@
 extends "res://Scripts/Items/Items.gd"
 
 func _ready():
-	items_list = [load("res://Scenes/Items/Bat/BatTooth.tscn"), load("res://Scenes/Items/Bat/BatWing.tscn")]
+	items_list = [load("res://Scenes/Items/Bat/BatTooth.tscn"), load("res://Scenes/Items/Bat/BatWing.tscn"), load("res://Scenes/Items/Bat/BatHat.tscn")]
 	
 	
 func drop():

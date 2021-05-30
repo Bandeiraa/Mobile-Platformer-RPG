@@ -4,6 +4,7 @@ signal animate
 signal attack 
 signal die
 signal disconnect_camera
+signal send_status
 #signal respawn
 
 const DEATH_EFFECT = preload("res://Scenes/Enemies/DeathEffect.tscn")
@@ -32,6 +33,7 @@ var direction = Vector2.ZERO
 var gravity = 500
 
 func _ready():
+	emit_signal("send_status", player_stats.attack, player_stats.max_health)
 	update_health(player_stats.health)
 	
 	

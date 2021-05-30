@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Aventureiro.png-acd65a49b18a7752c06fdcf4a2f99901.stex"
+path="res://.import/Player_Faceset_Skin_00.png-cabdd8bcd58f5e52793a8b577eca372c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Faceset/Aventureiro.png"
-dest_files=[ "res://.import/Aventureiro.png-acd65a49b18a7752c06fdcf4a2f99901.stex" ]
+source_file="res://Sprites/Faceset/Player_Faceset_Skin_00.png"
+dest_files=[ "res://.import/Player_Faceset_Skin_00.png-cabdd8bcd58f5e52793a8b577eca372c.stex" ]
 
 [params]
 

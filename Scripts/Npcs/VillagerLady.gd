@@ -45,7 +45,7 @@ func on_interact(dialogue, quest_status):
 	
 func _on_DetectionZone_body_entered(body):
 	player_ref = body
-	if quest_state != "normal_dialogue" or quest_state != "":
+	if quest_state != "normal_dialogue" and quest_state != "":
 		quest_icon.show()
 		
 		

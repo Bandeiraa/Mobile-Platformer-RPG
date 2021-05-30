@@ -45,7 +45,6 @@ position = Vector2( 5.14188, 108.347 )
 
 [node name="VillagerGuard" parent="Npcs" instance=ExtResource( 18 )]
 position = Vector2( -176.575, 127.961 )
-collision_layer = 64
 
 [node name="Enemies" type="Node2D" parent="."]
 visible = false

@@ -1,6 +1,7 @@
 extends Node
 
 export var max_health = 1
+export var attack = 1
 
 onready var health = max_health setget set_health 
 

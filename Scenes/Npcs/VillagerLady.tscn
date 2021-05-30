@@ -50,6 +50,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 5 )
 animation = "Idle"
+frame = 1
 playing = true
 flip_h = true
 script = SubResource( 6 )
