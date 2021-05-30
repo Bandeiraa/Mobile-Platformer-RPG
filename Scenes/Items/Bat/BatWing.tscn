@@ -16,7 +16,7 @@ collision_mask = 2
 script = ExtResource( 3 )
 drop_rate = 40.0
 item_name = "Asa de Morcego"
-item_type = "Recursos de Monstro"
+item_type = "Resource"
 item_amount = 1
 
 [node name="CollisionShape2D" parent="." index="0"]

@@ -28,9 +28,10 @@ func get_item(item):
 	else:
 		var item_name = item.item_name
 		var item_amount = item.item_amount
+		var item_type = item.item_type
 		chosen_child.get_node("ItemTextureRect").texture = item.item_texture
 		chosen_child.get_node("ItemAmount").text = str(item_amount)
-		chosen_child.get_item_info(item_name, item_amount)
+		chosen_child.get_item_info(item_name, item_amount, item_type)
 		set_texture()
 		
 		
@@ -58,21 +59,23 @@ func get_drag_data(_position):
 	var current_slot = get_child(item_index)
 	var item_name = current_slot.item_name
 	var amount = current_slot.item_amount
+	var item_type = current_slot.item_type
 	var image = current_slot.get_node("ItemTextureRect").texture
 	if image != null:
-		var dictionary = data_dictionary(image, item_name, amount, item_index)
+		var dictionary = data_dictionary(image, item_name, amount, item_index, item_type)
 		drag_preview(image)
 		remove_item(item_index)
 		
 		return dictionary
 	
 #Fill data dictionary
-func data_dictionary(item_image, item_name, item_amount, index):
+func data_dictionary(item_image, item_name, item_amount, index, item_type):
 	var data = {}
 	data.item_image = item_image
 	data.item_name = item_name
 	data.item_amount = item_amount
 	data.item_index = index
+	data.item_type = item_type
 	return data
 	
 #Draws a preview of the item being dragged
@@ -87,16 +90,17 @@ func can_drop_data(_position, data):
 	
 	
 func drop_data(_position, data):
-	set_item(data.item_image, data.item_name, data.item_amount, data.item_index)
+	set_item(data.item_image, data.item_name, data.item_amount, data.item_index, data.item_type)
 	
 	
-func set_item(image, previous_item_name, amount, index):
+func set_item(image, previous_item_name, amount, index, previous_item_type):
 	#Use index wisely to do verifications
 	var current_slot = get_child(item_index)
 	var item_label = current_slot.get_node("ItemAmount")
 	var item_image = current_slot.get_node("ItemTextureRect")
 	var item_amount = item_label.text
 	var item_name = current_slot.item_name
+	var item_type = current_slot.item_type
 	var current_image = item_image.texture
 
 	if current_slot.item_name != "":
@@ -106,16 +110,16 @@ func set_item(image, previous_item_name, amount, index):
 			var previous_slot = get_child(index)
 			previous_slot.get_node("ItemTextureRect").texture = current_image
 			previous_slot.get_node("ItemAmount").text = item_amount
-			previous_slot.get_item_info(item_name, int(item_amount))
+			previous_slot.get_item_info(item_name, int(item_amount), item_type)
 			
 			item_image.texture = image
 			item_label.text = str(amount)
-			current_slot.get_item_info(previous_item_name, amount)
+			current_slot.get_item_info(previous_item_name, amount, previous_item_type)
 		
 	else:
 		item_image.texture = image
 		item_label.text = str(amount)
-		current_slot.get_item_info(previous_item_name, amount)
+		current_slot.get_item_info(previous_item_name, amount, previous_item_type)
 		
 	set_texture()
 	

@@ -17,7 +17,7 @@ collision_mask = 2
 script = ExtResource( 2 )
 drop_rate = 100.0
 item_name = "Chapéu de Morcego"
-item_type = "Equipamento"
+item_type = "Hat"
 item_amount = 1
 
 [node name="CollisionShape2D" parent="." index="0"]

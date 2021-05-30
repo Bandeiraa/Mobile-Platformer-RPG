@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sprites/UI/Inventory.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/GUI/InventorySlotContainer.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scripts/GUI/Intentory/PlayerFaceset.gd" type="Script" id=4]
 [ext_resource path="res://Resources/StatusFont.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Scripts/GUI/Intentory/StatusContainer.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/GUI/EquipmentSlotContainer.tscn" type="PackedScene" id=7]
 
 [node name="Inventory" type="Control"]
 anchor_right = 1.0
@@ -113,3 +114,5 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="EquipmentSlotContainer" parent="EquipmentsInventoryContainer/EquipmentsInventoryTexture" instance=ExtResource( 7 )]

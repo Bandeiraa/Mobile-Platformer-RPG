@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "EquipmentSlotManager",
+"language": "GDScript",
+"path": "res://Scripts/GUI/Intentory/EquipmentSlot.gd"
+}, {
 "base": "TextureRect",
 "class": "SlotManager",
 "language": "GDScript",
 "path": "res://Scripts/GUI/Intentory/Slot.gd"
 } ]
 _global_script_class_icons={
+"EquipmentSlotManager": "",
 "SlotManager": ""
 }
 
