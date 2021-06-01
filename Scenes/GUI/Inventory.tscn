@@ -144,3 +144,7 @@ __meta__ = {
 }
 
 [node name="EquipmentSlotContainer" parent="EquipmentsInventoryContainer/EquipmentsInventoryTexture" instance=ExtResource( 7 )]
+
+[connection signal="entered_equip_area" from="EquipmentsInventoryContainer/EquipmentsInventoryTexture/EquipmentSlotContainer" to="InventoryContainer/InventoryTexture/InventorySlotContainer" method="mouse_entered"]
+[connection signal="exited_equip_area" from="EquipmentsInventoryContainer/EquipmentsInventoryTexture/EquipmentSlotContainer" to="InventoryContainer/InventoryTexture/InventorySlotContainer" method="mouse_exited"]
+[connection signal="swap_items" from="EquipmentsInventoryContainer/EquipmentsInventoryTexture/EquipmentSlotContainer" to="InventoryContainer/InventoryTexture/InventorySlotContainer" method="swap_equipped_item"]

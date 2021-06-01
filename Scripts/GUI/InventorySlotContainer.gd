@@ -5,6 +5,8 @@ onready var in_use_texture = load("res://Sprites/UI/Filled_Inventory_Slot.png")
 
 var busy_slots = 0
 var item_index
+var can_drop_item = false
+var data_dict
 
 func _ready():
 	randomize()
@@ -82,6 +84,7 @@ func data_dictionary(item_image, item_name, item_amount, index, item_type, item_
 	data.item_type = item_type
 	data.item_health = item_health
 	data.item_attack = item_attack
+	data_dict = data
 	return data
 	
 #Draws a preview of the item being dragged
@@ -96,9 +99,10 @@ func can_drop_data(_position, data):
 	
 	
 func drop_data(_position, data):
-	set_item(data.item_image, data.item_name, data.item_amount, data.item_index, data.item_type, data.item_health, data.item_attack)
-	
-	
+	if can_drop_item:
+		set_item(data.item_image, data.item_name, data.item_amount, data.item_index, data.item_type, data.item_health, data.item_attack)
+		
+		
 func set_item(image, previous_item_name, amount, index, previous_item_type, previous_item_health, previous_item_attack):
 	#Use index wisely to do verifications
 	var current_slot = get_child(item_index)
@@ -141,4 +145,27 @@ func remove_item(index):
 	
 func _unhandled_input(event):
 	if event.is_action_released("ui_left_mouse_button"):
+		if can_drop_item == false:
+			set_item(data_dict.item_image, data_dict.item_name, data_dict.item_amount, data_dict.item_index, data_dict.item_type, data_dict.item_health, data_dict.item_attack)
+		
 		set_texture()
+		
+		
+func swap_equipped_item(item_img, received_name, received_type, received_health, received_attack, index):
+	var current_slot = get_child(index)
+	var item_label = current_slot.get_node("ItemAmount")
+	var item_image = current_slot.get_node("ItemTextureRect")
+	
+	item_image.texture = item_img
+	item_label.text = str(1)
+	current_slot.get_item_info(received_name, 1, received_type, received_health, received_attack)
+	
+	set_texture()
+
+
+func mouse_entered():
+	can_drop_item = true
+
+
+func mouse_exited():
+	can_drop_item = false
